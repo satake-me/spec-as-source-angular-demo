@@ -5,14 +5,13 @@ module.exports = withNativeFederation({
 
   shared: {
     ...shareAll(
-      { singleton: true, strictVersion: true, requiredVersion: 'auto', build: 'package' },
+      { singleton: true, strictVersion: true, requiredVersion: 'auto' },
       {
         overrides: {
           '@angular/core': {
             singleton: true,
             strictVersion: true,
             requiredVersion: 'auto',
-            build: 'package',
             includeSecondaries: { keepAll: true },
           },
         },

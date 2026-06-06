@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 
@@ -9,7 +9,6 @@ import { provideAppKeycloak } from './core/keycloak/keycloak.config';
 export function createAppConfig(runtimeSettings: KeycloakRuntimeSettings): ApplicationConfig {
   return {
     providers: [
-      provideBrowserGlobalErrorListeners(),
       provideHttpClient(),
       provideRouter(routes),
       provideAppKeycloak(runtimeSettings),

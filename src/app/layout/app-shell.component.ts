@@ -71,6 +71,10 @@ export class AppShellComponent {
   );
 
   constructor() {
+    if (this.authFacade.session().isAuthenticated) {
+      void this.authFacade.ensureProfileLoaded();
+    }
+
     this.loadNavigationMenu();
 
     this.breakpointObserver
