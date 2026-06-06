@@ -1,11 +1,8 @@
 .account-page {
-  min-height: 100vh;
+  min-height: 100%;
   display: grid;
   gap: clamp(1rem, 2vw, 1.5rem);
-  grid-template-columns: minmax(0, 42rem);
-  justify-content: center;
-  align-content: start;
-  padding: clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(1rem, 3vw, 2rem);
   background: var(--mat-sys-surface);
 }
 
@@ -64,6 +61,5 @@ h2 {
 @media (max-width: 640px) {
   .account-page {
     padding: 1rem;
-    grid-template-columns: minmax(0, 1fr);
   }
 }
