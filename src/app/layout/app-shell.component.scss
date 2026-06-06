@@ -161,6 +161,12 @@
 
 .active-link {
   font-weight: 600;
+  color: var(--mat-sys-primary);
+}
+
+.active-link mat-icon,
+.active-link [matListItemTitle] {
+  color: inherit;
 }
 
 @media (max-width: 767px) {

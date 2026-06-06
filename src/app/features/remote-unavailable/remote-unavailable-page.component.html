@@ -1,0 +1,28 @@
+<section class="remote-unavailable-page" data-testid="remote-unavailable-page">
+  <mat-card class="remote-unavailable-card" appearance="outlined" data-testid="remote-unavailable-card">
+    <header class="page-header">
+      <h1>Remote application unavailable</h1>
+      <p class="supporting-copy">
+        {{ remoteTitle }} is not running at the moment.
+      </p>
+      <p class="supporting-copy">
+        Please try again later.
+      </p>
+    </header>
+
+    <section class="warning-state" role="status" aria-live="polite" data-testid="remote-unavailable-warning">
+      <mat-icon aria-hidden="true">cloud_off</mat-icon>
+      <span>The remote service is temporarily offline.</span>
+    </section>
+
+    <div class="action-row">
+      <button mat-flat-button type="button" class="action-row__primary" (click)="retryCurrentRoute()">
+        Retry now
+      </button>
+
+      <a mat-button class="action-row__secondary" routerLink="/home">
+        Go to home instead
+      </a>
+    </div>
+  </mat-card>
+</section>

@@ -10,8 +10,66 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    .app-startup-loading {
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      background: #f6f6f8;
+      color: #202124;
+      font-family: Roboto, system-ui, sans-serif;
+    }
+
+    .app-startup-loading__card {
+      width: min(28rem, calc(100vw - 2rem));
+      border: 1px solid #d6d9de;
+      border-radius: 1rem;
+      background: #fff;
+      padding: 1.25rem;
+      box-sizing: border-box;
+      display: grid;
+      gap: 0.75rem;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .app-startup-loading__spinner {
+      width: 1.75rem;
+      height: 1.75rem;
+      border: 3px solid #d6d9de;
+      border-top-color: #1a73e8;
+      border-radius: 50%;
+      animation: app-startup-spin 900ms linear infinite;
+    }
+
+    .app-startup-loading__title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .app-startup-loading__copy {
+      margin: 0;
+      color: #5f6368;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    @keyframes app-startup-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
 <body>
+  <div id="app-startup-loading" class="app-startup-loading" role="status" aria-live="polite">
+    <div class="app-startup-loading__card">
+      <div class="app-startup-loading__spinner" aria-hidden="true"></div>
+      <p class="app-startup-loading__title">Loading application</p>
+      <p class="app-startup-loading__copy">Please wait while the portal and remote applications initialize.</p>
+    </div>
+  </div>
   <app-root></app-root>
 </body>
 </html>

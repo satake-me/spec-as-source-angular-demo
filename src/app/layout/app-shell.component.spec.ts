@@ -92,6 +92,7 @@ describe('AppShellComponent', () => {
   const isAuthenticated = signal(false);
   const logout = vi.fn(async () => undefined);
   const login = vi.fn(async () => undefined);
+  const ensureProfileLoaded = vi.fn(async () => null);
   const loadMenu = vi.fn(() =>
     of({
       status: 'ready',
@@ -112,6 +113,8 @@ describe('AppShellComponent', () => {
     profile.set(null);
     logout.mockClear();
     login.mockClear();
+    ensureProfileLoaded.mockClear();
+    ensureProfileLoaded.mockResolvedValue(null);
     loadMenu.mockReset();
     loadMenu.mockReturnValue(
       of({
@@ -142,6 +145,7 @@ describe('AppShellComponent', () => {
             isAuthenticated,
             logout,
             login,
+            ensureProfileLoaded,
           },
         },
         {
@@ -284,6 +288,20 @@ describe('AppShellComponent', () => {
     const profileTrigger = compiled.querySelector('button[mat-stroked-button]') as HTMLButtonElement;
     expect(compiled.textContent).toContain('casey@example.com');
     expect(profileTrigger.getAttribute('aria-label')).toBe('Open profile menu for casey@example.com');
+  });
+
+  it('loads profile state when shell starts with an authenticated session', () => {
+    session.set({
+      ...session(),
+      status: 'authenticated',
+      isAuthenticated: true,
+    });
+    isAuthenticated.set(true);
+
+    const fixture = TestBed.createComponent(AppShellComponent);
+    fixture.detectChanges();
+
+    expect(ensureProfileLoaded).toHaveBeenCalledTimes(1);
   });
 
   it('opens the account entry point from the profile menu', async () => {

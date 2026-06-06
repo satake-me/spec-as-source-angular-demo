@@ -1,17 +1,21 @@
-import { bootstrapApplication } from '@angular/platform-browser';
+import { initFederation } from '@angular-architects/native-federation';
 
-import { createAppConfig } from './app/app.config';
 import { formatRuntimeConfigError, renderRuntimeConfigError } from './app/core/config/bootstrap-error';
-import { loadRuntimeConfig } from './app/core/config/runtime-config.loader';
-import { AppComponent } from './app/app.component';
+import { FEDERATION_MANIFEST_PATH } from './app/core/federation/federation.models';
 
-async function bootstrapApp(): Promise<void> {
-  const runtimeSettings = await loadRuntimeConfig();
+const APP_STARTUP_LOADING_ID = 'app-startup-loading';
 
-  await bootstrapApplication(AppComponent, createAppConfig(runtimeSettings));
+function hideStartupLoadingPage(targetDocument: Document): void {
+  targetDocument.getElementById(APP_STARTUP_LOADING_ID)?.remove();
 }
 
-void bootstrapApp().catch((err) => {
+void initFederation(FEDERATION_MANIFEST_PATH)
+  .then(() => import('./bootstrap'))
+  .then(() => {
+    hideStartupLoadingPage(document);
+  })
+  .catch((err) => {
   console.error(err);
+  hideStartupLoadingPage(document);
   renderRuntimeConfigError(document, formatRuntimeConfigError(err));
 });

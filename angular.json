@@ -19,6 +19,39 @@
       "prefix": "app",
       "architect": {
         "build": {
+          "builder": "@angular-architects/native-federation:build",
+          "options": {
+            "cacheExternalArtifacts": true
+          },
+          "configurations": {
+            "production": {
+              "target": "spec-as-source-angular-demo:esbuild:production"
+            },
+            "development": {
+              "target": "spec-as-source-angular-demo:esbuild:development",
+              "dev": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-architects/native-federation:build",
+          "options": {
+            "target": "spec-as-source-angular-demo:serve-original:development",
+            "rebuildDelay": 500,
+            "cacheExternalArtifacts": true,
+            "dev": true,
+            "devServer": true,
+            "port": 4200
+          }
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "buildTarget": "spec-as-source-angular-demo:esbuild:development"
+          }
+        },
+        "esbuild": {
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
@@ -33,6 +66,9 @@
             ],
             "styles": [
               "src/styles.scss"
+            ],
+            "polyfills": [
+              "es-module-shims"
             ]
           },
           "configurations": {
@@ -59,20 +95,20 @@
           },
           "defaultConfiguration": "production"
         },
-        "serve": {
+        "serve-original": {
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "spec-as-source-angular-demo:build:production"
+              "buildTarget": "spec-as-source-angular-demo:esbuild:production"
             },
             "development": {
-              "buildTarget": "spec-as-source-angular-demo:build:development"
+              "buildTarget": "spec-as-source-angular-demo:esbuild:development"
             }
           },
-          "defaultConfiguration": "development"
-        },
-        "test": {
-          "builder": "@angular/build:unit-test"
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4200
+          }
         }
       }
     }
