@@ -17,9 +17,9 @@
 
 **Purpose**: Project initialization and federation baseline
 
-- [ ] T001 Add Angular Native Federation and es-module-shims dependencies in package.json and package-lock.json
-- [ ] T002 Create the host federation config in federation.config.js
-- [ ] T003 Create the runtime remote registry in public/federation.manifest.json
+- [X] T001 Add Angular Native Federation and es-module-shims dependencies in package.json and package-lock.json
+- [X] T002 Create the host federation config in federation.config.js
+- [X] T003 Create the runtime remote registry in public/federation.manifest.json
 
 ---
 
@@ -29,10 +29,10 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 Update angular.json to use @angular-architects/native-federation builders, add es-module-shims as a polyfill, and define the serve-original target
-- [ ] T005 Update src/main.ts to initialize federation before bootstrap while preserving runtime config loading and error handling
-- [ ] T006 [P] Create typed federation contract models in src/app/core/federation/federation.models.ts
-- [ ] T007 [P] Add unit coverage for the federation manifest and remote contract shapes in src/app/core/federation/federation.models.spec.ts
+- [X] T004 Update angular.json to use @angular-architects/native-federation builders, add es-module-shims as a polyfill, and define the serve-original target
+- [X] T005 Update src/main.ts to initialize federation before bootstrap while preserving runtime config loading and error handling
+- [X] T006 [P] Create typed federation contract models in src/app/core/federation/federation.models.ts
+- [X] T007 [P] Add unit coverage for the federation manifest and remote contract shapes in src/app/core/federation/federation.models.spec.ts
 
 **Checkpoint**: Foundation ready - user story implementation can now begin
 
@@ -46,13 +46,13 @@
 
 ### Tests for User Story 1 ⚠️
 
-- [ ] T008 [P] [US1] Add route coverage for mf1 and mf2 lazy loading in src/app/app.routes.spec.ts
-- [ ] T009 [P] [US1] Add Playwright coverage for host navigation to /mf1 and /mf2 in e2e/independent-remotes.spec.ts
+- [X] T008 [P] [US1] Add route coverage for mf1 and mf2 lazy loading in src/app/app.routes.spec.ts
+- [X] T009 [P] [US1] Add Playwright coverage for host navigation to /mf1 and /mf2 in e2e/independent-remotes.spec.ts
 
 ### Implementation for User Story 1
 
-- [ ] T010 [P] [US1] Add mf1 and mf2 lazy routes with loadRemoteModule in src/app/app.routes.ts
-- [ ] T011 [P] [US1] Add mf1 and mf2 navigation entries in public/config/sidebar-menu.json
+- [X] T010 [P] [US1] Add mf1 and mf2 lazy routes with loadRemoteModule in src/app/app.routes.ts
+- [X] T011 [P] [US1] Add mf1 and mf2 navigation entries in public/config/sidebar-menu.json
 
 **Checkpoint**: User Story 1 should now be fully functional and testable independently
 
@@ -66,13 +66,13 @@
 
 ### Tests for User Story 2 ⚠️
 
-- [ ] T012 [P] [US2] Add regression coverage proving remote URLs are driven by public/federation.manifest.json in src/app/app.routes.spec.ts
-- [ ] T013 [P] [US2] Add contract coverage for stable exposed module keys in src/app/core/federation/federation.models.spec.ts
+- [X] T012 [P] [US2] Add regression coverage proving remote URLs are driven by public/federation.manifest.json in src/app/app.routes.spec.ts
+- [X] T013 [P] [US2] Add contract coverage for stable exposed module keys in src/app/core/federation/federation.models.spec.ts
 
 ### Implementation for User Story 2
 
-- [ ] T014 [US2] Update specs/011-independent-remotes/contracts/federation-manifest.contract.md with environment-specific ownership and versioning notes
-- [ ] T015 [US2] Update specs/011-independent-remotes/contracts/remote-component.contract.md to keep the exposed-module boundary explicit and stable
+- [X] T014 [US2] Update specs/011-independent-remotes/contracts/federation-manifest.contract.md with environment-specific ownership and versioning notes
+- [X] T015 [US2] Update specs/011-independent-remotes/contracts/remote-component.contract.md to keep the exposed-module boundary explicit and stable
 
 **Checkpoint**: User Story 1 AND User Story 2 should now both work independently
 
@@ -86,13 +86,13 @@
 
 ### Tests for User Story 3 ⚠️
 
-- [ ] T016 [P] [US3] Add e2e coverage for one remote being unavailable while the other still loads in e2e/independent-remotes.spec.ts
-- [ ] T017 [P] [US3] Add contract regression coverage that the host only relies on published remote contracts in src/app/core/federation/federation.models.spec.ts
+- [X] T016 [P] [US3] Add e2e coverage for one remote being unavailable while the other still loads in e2e/independent-remotes.spec.ts
+- [X] T017 [P] [US3] Add contract regression coverage that the host only relies on published remote contracts in src/app/core/federation/federation.models.spec.ts
 
 ### Implementation for User Story 3
 
-- [ ] T018 [US3] Update specs/011-independent-remotes/quickstart.md with separate repository startup, deployment, and validation steps
-- [ ] T019 [US3] Add remote isolation guidance to specs/011-independent-remotes/data-model.md so the published contract stays the only host dependency
+- [X] T018 [US3] Update specs/011-independent-remotes/quickstart.md with separate repository startup, deployment, and validation steps
+- [X] T019 [US3] Add remote isolation guidance to specs/011-independent-remotes/data-model.md so the published contract stays the only host dependency
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -102,9 +102,9 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T020 [P] Add any remaining host-side accessibility or unavailable-remote coverage in e2e/independent-remotes.spec.ts
+- [X] T020 [P] Add any remaining host-side accessibility or unavailable-remote coverage in e2e/independent-remotes.spec.ts
 - [ ] T021 Run the validation steps from specs/011-independent-remotes/quickstart.md and update the quickstart if any command or port differs
-- [ ] T022 Audit src/app/ and public/ for any hardcoded remote source imports or federation URLs and remove them if found
+- [X] T022 Audit src/app/ and public/ for any hardcoded remote source imports or federation URLs and remove them if found
 
 ---
 

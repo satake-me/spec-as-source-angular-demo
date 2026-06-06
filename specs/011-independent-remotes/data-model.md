@@ -49,6 +49,13 @@
   - The host must import the exact exposed module key published by the remote.
   - The remote component contract must stay stable unless the host route contract is updated in lockstep.
 
+## Isolation Guidance
+
+- The host depends only on published federation contracts (`remoteName`, manifest URL, exposed module key).
+- Remote repositories own internal component structure, dependencies, and release cadence.
+- Host code must not import remote source internals or repository-local paths.
+- Contract changes must be introduced through explicit versioned boundary updates, not implicit source coupling.
+
 ## Relationships
 
 - A single `FederationManifest` contains many `ExternalCapability` entries.

@@ -22,6 +22,20 @@
 4. Start the host application from `spec-as-source-angular-demo`.
 5. Open the host and navigate to the remote capability routes.
 
+## Independent Repository Workflow
+
+1. In the `mf1` repository, install dependencies and run its local serve command on `4201`.
+2. In the `mf2` repository, install dependencies and run its local serve command on `4202`.
+3. In the host repository, install dependencies and run `npm start` on `4200`.
+4. Keep each process in its own terminal so any remote can be restarted independently.
+
+## Deployment Ownership
+
+- Host team deploys the shell and publishes `public/federation.manifest.json` per environment.
+- `mf1` team deploys and versions its own remote artifact independently.
+- `mf2` team deploys and versions its own remote artifact independently.
+- Updating one remote should only require manifest value changes when endpoint locations change.
+
 ## Expected Host Paths
 
 - Home page: `/`
@@ -34,3 +48,10 @@
 - The host can reach both remotes through separate navigation entries.
 - Each remote continues to render when the other remote is unavailable.
 - Updating one remote does not require rebuilding unrelated remotes.
+
+## Isolation Validation Scenario
+
+1. Stop `mf1` while keeping host and `mf2` running.
+2. Visit `/mf1` and confirm that only this capability fails to load.
+3. Visit `/mf2` and confirm it still renders.
+4. Restart `mf1` and verify `/mf1` recovers without host rebuild.
