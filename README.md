@@ -270,6 +270,19 @@ The browser smoke test now also verifies the authenticated `Log off` action when
 - Redirect URIs are derived from the active browser origin instead of a hardcoded localhost value.
 - If the runtime config file is missing or invalid, the app renders an application configuration error instead of silently falling back to the wrong environment.
 
+### Federation Runtime Manifest
+
+Remote URLs are also environment-owned runtime configuration. The host loads federation remotes from `/config/federation.manifest.json` at startup.
+
+Use these files as environment templates:
+
+- [public/config/federation.manifest.json](public/config/federation.manifest.json): active development-local manifest in this repository
+- [public/config/federation.manifest.development.json](public/config/federation.manifest.development.json): development example
+- [public/config/federation.manifest.staging.json](public/config/federation.manifest.staging.json): staging example
+- [public/config/federation.manifest.production.json](public/config/federation.manifest.production.json): production example
+
+For each deployment target, publish the correct URLs at `/config/federation.manifest.json`. This allows changing remote endpoints per environment without rebuilding the host bundle.
+
 ### Version Note
 
 The target Keycloak server for this demo is `26.6.1`. The npm package `keycloak-js@26.6.1` is not published, so the application uses the latest published 26.x client release, `26.2.4`, which remains within the supported 26.x compatibility range for `keycloak-angular` 21.

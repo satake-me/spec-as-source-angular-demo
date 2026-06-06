@@ -10,7 +10,7 @@ import {
 
 describe('federation.models', () => {
 	it('publishes the manifest path and remote names used by the host', () => {
-		expect(FEDERATION_MANIFEST_PATH).toBe('/federation.manifest.json');
+		expect(FEDERATION_MANIFEST_PATH).toBe('/config/federation.manifest.json');
 		expect(FEDERATION_REMOTE_NAMES).toEqual(['mf1', 'mf2']);
 	});
 
@@ -64,7 +64,7 @@ describe('federation.models', () => {
 				exposedModule: './Component',
 			};
 
-			expect(publishedDependencies.manifestPath).toBe('/federation.manifest.json');
+			expect(publishedDependencies.manifestPath).toBe('/config/federation.manifest.json');
 			expect(publishedDependencies.remoteNames).toEqual(['mf1', 'mf2']);
 			expect(publishedDependencies.exposedModule).toBe('./Component');
 		});

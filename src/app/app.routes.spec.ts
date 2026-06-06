@@ -12,6 +12,7 @@ import { routes } from './app.routes';
 import { canActivateAuthenticatedRoute } from './core/auth/auth.guard';
 import { AccountPageComponent } from './features/account/account-page.component';
 import { HomePageComponent } from './features/home/home-page.component';
+import { RemoteUnavailablePageComponent } from './features/remote-unavailable/remote-unavailable-page.component';
 import { WelcomePageComponent } from './features/welcome/welcome-page.component';
 import { AppShellComponent } from './layout/app-shell.component';
 
@@ -88,6 +89,14 @@ describe('app routes', () => {
 
     expect(component).toBe(Mf2Component as unknown as Type<unknown>);
     expect(loadRemoteModuleMock).toHaveBeenCalledWith('mf2', './Component');
+  });
+
+  it('shows a friendly fallback page when a remote is unavailable', async () => {
+    loadRemoteModuleMock.mockRejectedValue(new Error('Remote is offline'));
+
+    const component = await routes[0]?.children?.[4]?.loadComponent?.();
+
+    expect(component).toBe(RemoteUnavailablePageComponent as unknown as Type<unknown>);
   });
 
   it('keeps route definitions free from hardcoded remote entry URLs', () => {

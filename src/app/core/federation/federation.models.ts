@@ -1,4 +1,4 @@
-export const FEDERATION_MANIFEST_PATH = '/federation.manifest.json' as const;
+export const FEDERATION_MANIFEST_PATH = '/config/federation.manifest.json' as const;
 
 export const FEDERATION_REMOTE_NAMES = ['mf1', 'mf2'] as const;
 
