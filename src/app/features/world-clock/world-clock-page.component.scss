@@ -116,6 +116,10 @@
     padding: 1rem;
   }
 
+  .clocks-grid {
+    grid-template-columns: 1fr;
+  }
+
   .page-header {
     flex-direction: column;
     gap: 1rem;
@@ -132,6 +136,10 @@
 
 /* Responsive: Tablet (600px - 960px) */
 @media (min-width: 600px) and (max-width: 959px) {
+  .clocks-grid {
+    grid-template-columns: 1fr;
+  }
+
   .page-header {
     gap: 1rem;
   }

@@ -98,6 +98,10 @@
   white-space: nowrap;
 }
 
+.layout-shell__profile-trigger--mobile {
+  color: var(--mat-sys-on-surface);
+}
+
 .layout-shell__container {
   min-height: 0;
   background: var(--mat-sys-surface-container-low);
@@ -172,6 +176,19 @@
 @media (max-width: 767px) {
   .layout-shell__clock-slot {
     display: none;
+  }
+
+  .layout-shell__toolbar {
+    gap: 0.25rem;
+  }
+
+  .layout-shell__menu-toggle {
+    margin-right: 0.25rem;
+  }
+
+  .layout-shell__profile-trigger--mobile {
+    margin-left: 0.25rem;
+    background: transparent;
   }
 }
 

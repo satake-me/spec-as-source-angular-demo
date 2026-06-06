@@ -1,5 +1,5 @@
 /**
- * Timezone Configurations: 9 key global regions
+ * Timezone Configurations: 10 key global regions
  *
  * Provides readonly configuration for supported regions.
  * Used to initialize WorldClockEntry instances.
@@ -12,61 +12,26 @@ import { TimeZoneConfig } from './world-clock.models';
 /**
  * TIMEZONE_CONFIGS: Array of supported timezone configurations
  *
- * - Brazil: Brasília
- * - United Kingdom: London
- * - China: Shanghai
- * - United States: New York
- * - India: New Delhi
- * - Japan: Tokyo
+ * - UTC-0: Prime Meridian
  * - Germany: Berlin
- * - Australia: Sydney
  * - United Arab Emirates: Dubai
+ * - India: New Delhi
+ * - China: Shanghai
+ * - Japan: Tokyo
+ * - Australia: Sydney
+ * - Brazil: Brasilia
+ * - United States: New York
  *
  * IANA timezone identifiers automatically handle DST transitions.
  * BCP 47 locale tags ensure locale-aware formatting.
  */
 export const TIMEZONE_CONFIGS: ReadonlyArray<TimeZoneConfig> = [
   {
-    id: 'brazil',
-    region: 'Brazil',
-    city: 'Brasília',
-    timeZoneId: 'America/Sao_Paulo',
-    locale: 'pt-BR',
-  },
-  {
-    id: 'uk',
-    region: 'United Kingdom',
-    city: 'London',
-    timeZoneId: 'Europe/London',
+    id: 'utc',
+    region: 'UTC-0',
+    city: 'Prime Meridian',
+    timeZoneId: 'Etc/UTC',
     locale: 'en-GB',
-  },
-  {
-    id: 'china',
-    region: 'China',
-    city: 'Shanghai',
-    timeZoneId: 'Asia/Shanghai',
-    locale: 'zh-CN',
-  },
-  {
-    id: 'usa',
-    region: 'United States',
-    city: 'New York',
-    timeZoneId: 'America/New_York',
-    locale: 'en-US',
-  },
-  {
-    id: 'india',
-    region: 'India',
-    city: 'New Delhi',
-    timeZoneId: 'Asia/Kolkata',
-    locale: 'en-IN',
-  },
-  {
-    id: 'japan',
-    region: 'Japan',
-    city: 'Tokyo',
-    timeZoneId: 'Asia/Tokyo',
-    locale: 'ja-JP',
   },
   {
     id: 'germany',
@@ -76,6 +41,34 @@ export const TIMEZONE_CONFIGS: ReadonlyArray<TimeZoneConfig> = [
     locale: 'de-DE',
   },
   {
+    id: 'uae',
+    region: 'United Arab Emirates',
+    city: 'Dubai',
+    timeZoneId: 'Asia/Dubai',
+    locale: 'en-AE',
+  },
+  {
+    id: 'india',
+    region: 'India',
+    city: 'New Delhi',
+    timeZoneId: 'Asia/Kolkata',
+    locale: 'en-IN',
+  },
+  {
+    id: 'china',
+    region: 'China',
+    city: 'Shanghai',
+    timeZoneId: 'Asia/Shanghai',
+    locale: 'zh-CN',
+  },
+  {
+    id: 'japan',
+    region: 'Japan',
+    city: 'Tokyo',
+    timeZoneId: 'Asia/Tokyo',
+    locale: 'ja-JP',
+  },
+  {
     id: 'australia',
     region: 'Australia',
     city: 'Sydney',
@@ -83,10 +76,24 @@ export const TIMEZONE_CONFIGS: ReadonlyArray<TimeZoneConfig> = [
     locale: 'en-AU',
   },
   {
-    id: 'uae',
-    region: 'United Arab Emirates',
-    city: 'Dubai',
-    timeZoneId: 'Asia/Dubai',
-    locale: 'en-AE',
+    id: 'brazil',
+    region: 'Brazil',
+    city: 'Brasília',
+    timeZoneId: 'America/Sao_Paulo',
+    locale: 'pt-BR',
+  },
+  {
+    id: 'usa',
+    region: 'United States',
+    city: 'New York',
+    timeZoneId: 'America/New_York',
+    locale: 'en-US',
+  },
+  {
+    id: 'uk',
+    region: 'United Kingdom',
+    city: 'London',
+    timeZoneId: 'Europe/London',
+    locale: 'en-GB',
   },
 ];

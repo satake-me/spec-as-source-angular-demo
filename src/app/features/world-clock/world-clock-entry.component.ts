@@ -45,9 +45,14 @@ export class WorldClockEntryComponent {
    * Example: -180 minutes → "UTC-3"
    */
   utcOffsetDisplay(): string {
-    const hours = this.entry.utcOffset / 60;
-    const sign = hours >= 0 ? '+' : '';
-    return `UTC${sign}${hours.toFixed(0)}`;
+    const totalMinutes = this.entry.utcOffset;
+    const sign = totalMinutes > 0 ? '+' : totalMinutes < 0 ? '-' : '-';
+    const absoluteMinutes = Math.abs(totalMinutes);
+    const hours = Math.floor(absoluteMinutes / 60);
+    const minutes = absoluteMinutes % 60;
+    const minutesSegment = minutes === 0 ? '' : `:${String(minutes).padStart(2, '0')}`;
+
+    return `UTC${sign}${hours}${minutesSegment}`;
   }
 
   hourHandRotation(): number {

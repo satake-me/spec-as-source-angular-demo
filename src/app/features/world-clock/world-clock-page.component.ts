@@ -75,12 +75,12 @@ export class WorldClockPageComponent {
   /**
    * Grid template for responsive layout
    * Small screens: 1 column
-   * Medium screens: 2 columns  
+   * Medium screens: 1 column
    * Large screens: 3 columns
    */
   readonly gridColumns = computed(() => {
     if (this.isSmallScreen().matches) return '1';
-    if (this.isMobileScreen().matches) return '2';
+    if (this.isMobileScreen().matches) return '1';
     return '3';
   });
 

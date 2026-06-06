@@ -40,11 +40,37 @@ export class WorldClockTimeService {
    */
   private resolveCurrentTimes(): ReadonlyArray<WorldClockEntry> {
     const now = new Date();
-    return TIMEZONE_CONFIGS.map(config => ({
+    const entries = TIMEZONE_CONFIGS.map(config => ({
       ...config,
       currentTime: now,
       utcOffset: this.getUTCOffset(config.timeZoneId),
     }));
+
+    return this.sortByUtcOrder(entries);
+  }
+
+  private sortByUtcOrder(entries: ReadonlyArray<WorldClockEntry>): ReadonlyArray<WorldClockEntry> {
+    return [...entries].sort((a, b) => {
+      if (a.id === 'utc') return -1;
+      if (b.id === 'utc') return 1;
+
+      const aZero = a.utcOffset === 0;
+      const bZero = b.utcOffset === 0;
+      if (aZero && !bZero) return -1;
+      if (!aZero && bZero) return 1;
+
+      const aPositive = a.utcOffset > 0;
+      const bPositive = b.utcOffset > 0;
+      if (aPositive !== bPositive) {
+        return aPositive ? -1 : 1;
+      }
+
+      if (a.utcOffset !== b.utcOffset) {
+        return b.utcOffset - a.utcOffset;
+      }
+
+      return a.region.localeCompare(b.region);
+    });
   }
 
   /**
@@ -68,6 +94,7 @@ export class WorldClockTimeService {
    */
   private getUTCOffset(timeZoneId: string): number {
     const now = new Date();
+    now.setMilliseconds(0);
 
     // Validate timezone by attempting to format
     try {
@@ -92,9 +119,10 @@ export class WorldClockTimeService {
       // This gives us the "local" time as if it were UTC
       const localDate = new Date(Date.UTC(year, month - 1, day, hour, minute, second));
 
-      // Calculate offset: (UTC time - local time as if UTC) / 60000 ms per minute
+      // Calculate offset: (local time as if UTC - UTC time) / 60000 ms per minute
       const offsetMs = now.getTime() - localDate.getTime();
-      return offsetMs / 60000;
+      const offset = Math.round(-(offsetMs / 60000));
+      return offset === 0 ? 0 : offset;
     } catch (error) {
       throw new Error(
         `Failed to resolve timezone "${timeZoneId}": ${error instanceof Error ? error.message : 'Unknown error'}. Verify IANA timezone identifier.`

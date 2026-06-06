@@ -17,20 +17,26 @@ describe('WorldClockTimeService', () => {
     service = TestBed.inject(WorldClockTimeService);
   });
 
-  it('should return exactly 9 clock entries (T010)', async () => {
+  it('should return exactly 10 clock entries with UTC-0 first (T010)', async () => {
     const entries = await firstValueFrom(service.getCurrentTimes());
-    expect(entries.length).toBe(9);
-    expect(entries[0].id).toBe('brazil');
-    expect(entries[1].id).toBe('uk');
-    expect(entries[2].id).toBe('china');
+    expect(entries.length).toBe(10);
+    expect(entries[0].id).toBe('utc');
 
     const ids = entries.map((entry) => entry.id);
+    expect(ids).toContain('utc');
     expect(ids).toContain('usa');
     expect(ids).toContain('india');
     expect(ids).toContain('japan');
     expect(ids).toContain('germany');
     expect(ids).toContain('australia');
     expect(ids).toContain('uae');
+
+    const nonUtcEntries = entries.slice(1);
+    const nonNegativeOffsets = nonUtcEntries.filter((entry) => entry.utcOffset >= 0).map((entry) => entry.utcOffset);
+    const negativeOffsets = nonUtcEntries.filter((entry) => entry.utcOffset < 0).map((entry) => entry.utcOffset);
+
+    expect(nonNegativeOffsets).toEqual([...nonNegativeOffsets].sort((a, b) => b - a));
+    expect(negativeOffsets).toEqual([...negativeOffsets].sort((a, b) => b - a));
   });
 
   it('should have valid entry structure with all required fields (T010)', async () => {
@@ -62,23 +68,24 @@ describe('WorldClockTimeService', () => {
     const brazil = entries.find((e) => e.id === 'brazil');
     const uk = entries.find((e) => e.id === 'uk');
     const china = entries.find((e) => e.id === 'china');
+    const utc = entries.find((e) => e.id === 'utc');
 
     expect(brazil).toBeDefined();
     expect(uk).toBeDefined();
     expect(china).toBeDefined();
+    expect(utc).toBeDefined();
+
+    expect(utc!.utcOffset).toBe(0);
 
     // Brazil (America/Sao_Paulo): UTC-3 or UTC-2
-    // getUTCOffset returns (UTC - Local), so UTC - (UTC-3) = +180 minutes
-    expect(brazil!.utcOffset).toBeGreaterThanOrEqual(119);
-    expect(brazil!.utcOffset).toBeLessThanOrEqual(241);
+    expect(brazil!.utcOffset).toBeGreaterThanOrEqual(-241);
+    expect(brazil!.utcOffset).toBeLessThanOrEqual(-119);
 
     // UK (Europe/London): UTC+0 or UTC+1
-    // UTC - (UTC+0) = 0; UTC - (UTC+1) = -60
-    expect(uk!.utcOffset).toBeGreaterThanOrEqual(-61);
+    expect(uk!.utcOffset).toBeGreaterThanOrEqual(-1);
     expect(uk!.utcOffset).toBeLessThanOrEqual(61);
 
     // China (Asia/Shanghai): UTC+8
-    // UTC - (UTC+8) = -480
-    expect(china!.utcOffset).toBeCloseTo(-480, 0);
+    expect(china!.utcOffset).toBeCloseTo(480, 0);
   });
 });

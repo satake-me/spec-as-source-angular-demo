@@ -27,28 +27,52 @@
       <span class="layout-shell__spacer"></span>
 
       @if (headerProfileState().isAuthenticated) {
-        <button
-          mat-stroked-button
-          type="button"
-          [matMenuTriggerFor]="profileMenu"
-          class="layout-shell__profile-trigger"
-          [attr.aria-label]="'Open profile menu for ' + headerProfileState().displayLabel"
-        >
-          <mat-icon>{{ headerProfileState().iconName }}</mat-icon>
-          <span class="layout-shell__profile-label">{{ headerProfileState().displayEmail }}</span>
-          <mat-icon>expand_more</mat-icon>
-        </button>
+        @if (isMobile()) {
+          <button
+            mat-icon-button
+            type="button"
+            [matMenuTriggerFor]="profileMenu"
+            class="layout-shell__profile-trigger--mobile"
+            [attr.aria-label]="'Open profile menu for ' + headerProfileState().displayLabel"
+          >
+            <mat-icon>{{ headerProfileState().iconName }}</mat-icon>
+          </button>
+        } @else {
+          <button
+            mat-stroked-button
+            type="button"
+            [matMenuTriggerFor]="profileMenu"
+            class="layout-shell__profile-trigger"
+            [attr.aria-label]="'Open profile menu for ' + headerProfileState().displayLabel"
+          >
+            <mat-icon>{{ headerProfileState().iconName }}</mat-icon>
+            <span class="layout-shell__profile-label">{{ headerProfileState().displayEmail }}</span>
+            <mat-icon class="layout-shell__profile-caret">expand_more</mat-icon>
+          </button>
+        }
       } @else {
-        <button
-          mat-stroked-button
-          type="button"
-          class="layout-shell__profile-trigger"
-          aria-label="Open sign in menu"
-          (click)="signIn()"
-        >
-          <mat-icon>{{ headerProfileState().iconName }}</mat-icon>
-          <span class="layout-shell__profile-label">Sign in</span>
-        </button>
+        @if (isMobile()) {
+          <button
+            mat-icon-button
+            type="button"
+            class="layout-shell__profile-trigger--mobile"
+            aria-label="Sign in"
+            (click)="signIn()"
+          >
+            <mat-icon>{{ headerProfileState().iconName }}</mat-icon>
+          </button>
+        } @else {
+          <button
+            mat-stroked-button
+            type="button"
+            class="layout-shell__profile-trigger"
+            aria-label="Open sign in menu"
+            (click)="signIn()"
+          >
+            <mat-icon>{{ headerProfileState().iconName }}</mat-icon>
+            <span class="layout-shell__profile-label">Sign in</span>
+          </button>
+        }
       }
     </mat-toolbar>
   </header>
