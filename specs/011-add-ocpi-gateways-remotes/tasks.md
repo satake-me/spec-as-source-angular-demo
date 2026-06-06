@@ -11,12 +11,12 @@
 
 **Purpose**: Prepare shell and remote repository scaffolding for federated development.
 
-- [ ] T001 Create remote repository bootstrap guide for `mf-ocpi` and `mf-gateways` in specs/011-add-ocpi-gateways-remotes/quickstart.md
-- [ ] T002 Configure shell dependency and build scripts for federation runtime in package.json
-- [ ] T003 [P] Add shell environment placeholders for OCPI and Gateways remote endpoints in public/config/
-- [ ] T004 [P] Create shell e2e spec scaffold for remote navigation flows in e2e/remotes-navigation.spec.ts
-- [ ] T005 [P] Create OCPI remote project scaffold with Native Federation baseline in ../mf-ocpi/
-- [ ] T006 [P] Create Gateways remote project scaffold with Native Federation baseline in ../mf-gateways/
+- [x] T001 Create remote repository bootstrap guide for `mf-ocpi` and `mf-gateways` in specs/011-add-ocpi-gateways-remotes/quickstart.md
+- [x] T002 Configure shell dependency and build scripts for federation runtime in package.json
+- [x] T003 [P] Add shell environment placeholders for OCPI and Gateways remote endpoints in public/config/
+- [x] T004 [P] Create shell e2e spec scaffold for remote navigation flows in e2e/remotes-navigation.spec.ts
+- [x] T005 [P] Create OCPI remote project scaffold with Native Federation baseline in ../mf-ocpi/
+- [x] T006 [P] Create Gateways remote project scaffold with Native Federation baseline in ../mf-gateways/
 
 ---
 
@@ -26,15 +26,15 @@
 
 **⚠️ CRITICAL**: No user story implementation starts before this phase is complete.
 
-- [ ] T007 Define `RemoteDefinition`, `RemoteRegistry`, and load-state contracts in src/app/layout/shell-remote.models.ts
-- [ ] T008 Implement runtime remote registry loader and validation rules in src/app/layout/shell-remote-registry.loader.ts
-- [ ] T009 [P] Add unit tests for registry parsing, uniqueness, and malformed entry handling in src/app/layout/shell-remote-registry.loader.spec.ts
-- [ ] T010 Add shell federation route helper for loading remote `./routes` contracts in src/app/layout/shell-remote-loader.ts
-- [ ] T011 [P] Add shell fallback component for unavailable remotes in src/app/layout/remote-unavailable.component.ts
-- [ ] T012 [P] Add shell fallback component template and styles in src/app/layout/remote-unavailable.component.html
-- [ ] T013 [P] Add shell fallback component styles for standardized error and recovery states in src/app/layout/remote-unavailable.component.scss
-- [ ] T014 Wire fallback behavior for remote load failures in src/app/app.routes.ts
-- [ ] T015 Add integration tests for remote loader success and failure transitions in src/app/app.routes.spec.ts
+- [x] T007 Define `RemoteDefinition`, `RemoteRegistry`, and load-state contracts in src/app/layout/shell-remote.models.ts
+- [x] T008 Implement runtime remote registry loader and validation rules in src/app/layout/shell-remote-registry.loader.ts
+- [x] T009 [P] Add unit tests for registry parsing, uniqueness, and malformed entry handling in src/app/layout/shell-remote-registry.loader.spec.ts
+- [x] T010 Add shell federation route helper for loading remote `./routes` contracts in src/app/layout/shell-remote-loader.ts
+- [x] T011 [P] Add shell fallback component for unavailable remotes in src/app/layout/remote-unavailable.component.ts
+- [x] T012 [P] Add shell fallback component template and styles in src/app/layout/remote-unavailable.component.html
+- [x] T013 [P] Add shell fallback component styles for standardized error and recovery states in src/app/layout/remote-unavailable.component.scss
+- [x] T014 Wire fallback behavior for remote load failures in src/app/app.routes.ts
+- [x] T015 Add integration tests for remote loader success and failure transitions in src/app/app.routes.spec.ts
 
 **Checkpoint**: Federation foundation complete; user stories can now be implemented independently.
 
@@ -48,20 +48,20 @@
 
 ### Tests for User Story 1
 
-- [ ] T016 [P] [US1] Add shell component test coverage for OCPI menu visibility and authorization gating in src/app/layout/shell-menu.component.spec.ts
-- [ ] T017 [P] [US1] Add shell integration test for `/ocpi` route loading and fallback path in src/app/app.routes.spec.ts
+- [x] T016 [P] [US1] Add shell component test coverage for OCPI menu visibility and authorization gating in src/app/layout/shell-menu.component.spec.ts
+- [x] T017 [P] [US1] Add shell integration test for `/ocpi` route loading and fallback path in src/app/app.routes.spec.ts
 - [ ] T018 [P] [US1] Add e2e flow for menu-to-OCPI navigation in e2e/remotes-navigation.spec.ts
-- [ ] T019 [P] [US1] Add OCPI remote unit/component test for initial page rendering in ../mf-ocpi/src/app/features/ocpi/ocpi-home-page.component.spec.ts
-- [ ] T020 [P] [US1] Add OCPI remote route exposure contract test for `./routes` and `remoteRoutes` in ../mf-ocpi/src/federation/exposes.routes.spec.ts
+- [x] T019 [P] [US1] Add OCPI remote unit/component test for initial page rendering in ../mf-ocpi/src/app/features/ocpi/ocpi-home-page.component.spec.ts
+- [x] T020 [P] [US1] Add OCPI remote route exposure contract test for `./routes` and `remoteRoutes` in ../mf-ocpi/src/federation/exposes.routes.spec.ts
 
 ### Implementation for User Story 1
 
-- [ ] T021 [US1] Add OCPI remote registry entry with route path and permissions in public/config/sidebar-menu.json
-- [ ] T022 [US1] Register shell top-level `/ocpi` federated route in src/app/app.routes.ts
-- [ ] T023 [US1] Implement OCPI remote route exposure via `remoteRoutes` in ../mf-ocpi/src/federation/exposes.routes.ts
-- [ ] T024 [US1] Implement OCPI initial landing page component in ../mf-ocpi/src/app/features/ocpi/ocpi-home-page.component.ts
-- [ ] T025 [US1] Wire OCPI remote root route to landing component in ../mf-ocpi/src/app/app.routes.ts
-- [ ] T026 [US1] Integrate OCPI load failure reason mapping to shell unavailable-module state in src/app/layout/shell-remote-loader.ts
+- [x] T021 [US1] Add OCPI remote registry entry with route path and permissions in public/config/sidebar-menu.json
+- [x] T022 [US1] Register shell top-level `/ocpi` federated route in src/app/app.routes.ts
+- [x] T023 [US1] Implement OCPI remote route exposure via `remoteRoutes` in ../mf-ocpi/src/federation/exposes.routes.ts
+- [x] T024 [US1] Implement OCPI initial landing page component in ../mf-ocpi/src/app/features/ocpi/ocpi-home-page.component.ts
+- [x] T025 [US1] Wire OCPI remote root route to landing component in ../mf-ocpi/src/app/app.routes.ts
+- [x] T026 [US1] Integrate OCPI load failure reason mapping to shell unavailable-module state in src/app/layout/shell-remote-loader.ts
 
 **Checkpoint**: US1 is independently functional and demonstrable as MVP.
 
@@ -75,20 +75,20 @@
 
 ### Tests for User Story 2
 
-- [ ] T027 [P] [US2] Add shell component test coverage for Gateways menu visibility and authorization gating in src/app/layout/shell-menu.component.spec.ts
-- [ ] T028 [P] [US2] Add shell integration test for `/gateways` route loading and fallback path in src/app/app.routes.spec.ts
+- [x] T027 [P] [US2] Add shell component test coverage for Gateways menu visibility and authorization gating in src/app/layout/shell-menu.component.spec.ts
+- [x] T028 [P] [US2] Add shell integration test for `/gateways` route loading and fallback path in src/app/app.routes.spec.ts
 - [ ] T029 [P] [US2] Add e2e flow for menu-to-Gateways navigation in e2e/remotes-navigation.spec.ts
-- [ ] T030 [P] [US2] Add Gateways remote unit/component test for initial page rendering in ../mf-gateways/src/app/features/gateways/gateways-home-page.component.spec.ts
-- [ ] T031 [P] [US2] Add Gateways remote route exposure contract test for `./routes` and `remoteRoutes` in ../mf-gateways/src/federation/exposes.routes.spec.ts
+- [x] T030 [P] [US2] Add Gateways remote unit/component test for initial page rendering in ../mf-gateways/src/app/features/gateways/gateways-home-page.component.spec.ts
+- [x] T031 [P] [US2] Add Gateways remote route exposure contract test for `./routes` and `remoteRoutes` in ../mf-gateways/src/federation/exposes.routes.spec.ts
 
 ### Implementation for User Story 2
 
-- [ ] T032 [US2] Add Gateways remote registry entry with route path and permissions in public/config/sidebar-menu.json
-- [ ] T033 [US2] Register shell top-level `/gateways` federated route in src/app/app.routes.ts
-- [ ] T034 [US2] Implement Gateways remote route exposure via `remoteRoutes` in ../mf-gateways/src/federation/exposes.routes.ts
-- [ ] T035 [US2] Implement Gateways initial landing page component in ../mf-gateways/src/app/features/gateways/gateways-home-page.component.ts
-- [ ] T036 [US2] Wire Gateways remote root route to landing component in ../mf-gateways/src/app/app.routes.ts
-- [ ] T037 [US2] Integrate Gateways load failure reason mapping to shell unavailable-module state in src/app/layout/shell-remote-loader.ts
+- [x] T032 [US2] Add Gateways remote registry entry with route path and permissions in public/config/sidebar-menu.json
+- [x] T033 [US2] Register shell top-level `/gateways` federated route in src/app/app.routes.ts
+- [x] T034 [US2] Implement Gateways remote route exposure via `remoteRoutes` in ../mf-gateways/src/federation/exposes.routes.ts
+- [x] T035 [US2] Implement Gateways initial landing page component in ../mf-gateways/src/app/features/gateways/gateways-home-page.component.ts
+- [x] T036 [US2] Wire Gateways remote root route to landing component in ../mf-gateways/src/app/app.routes.ts
+- [x] T037 [US2] Integrate Gateways load failure reason mapping to shell unavailable-module state in src/app/layout/shell-remote-loader.ts
 
 **Checkpoint**: US2 is independently functional with parity to US1 behavior.
 
@@ -102,17 +102,17 @@
 
 ### Tests for User Story 3
 
-- [ ] T038 [P] [US3] Add shell menu component tests for distinct labels and active-state transitions in src/app/layout/shell-menu.component.spec.ts
-- [ ] T039 [P] [US3] Add shell integration test for cross-remote navigation state continuity in src/app/app.routes.spec.ts
-- [ ] T040 [P] [US3] Add e2e scenario covering OCPI-to-Gateways-to-existing-route navigation in e2e/remotes-navigation.spec.ts
+- [x] T038 [P] [US3] Add shell menu component tests for distinct labels and active-state transitions in src/app/layout/shell-menu.component.spec.ts
+- [x] T039 [P] [US3] Add shell integration test for cross-remote navigation state continuity in src/app/app.routes.spec.ts
+- [x] T040 [P] [US3] Add e2e scenario covering OCPI-to-Gateways-to-existing-route navigation in e2e/remotes-navigation.spec.ts
 
 ### Implementation for User Story 3
 
-- [ ] T041 [US3] Add explicit menu metadata and ordering for OCPI and Gateways destinations in public/config/sidebar-menu.json
-- [ ] T042 [US3] Update shell menu projection logic to keep remote entries distinct and deterministic in src/app/layout/shell-menu-config.loader.ts
-- [ ] T043 [US3] Update shell active-route highlighting and aria-current behavior for remote routes in src/app/layout/shell-menu.component.ts
-- [ ] T044 [US3] Add accessibility and visual-state refinements for remote menu entries in src/app/layout/shell-menu.component.scss
-- [ ] T045 [US3] Ensure shell fallback copy includes destination-specific recovery messaging in src/app/layout/remote-unavailable.component.html
+- [x] T041 [US3] Add explicit menu metadata and ordering for OCPI and Gateways destinations in public/config/sidebar-menu.json
+- [x] T042 [US3] Update shell menu projection logic to keep remote entries distinct and deterministic in src/app/layout/shell-menu-config.loader.ts
+- [x] T043 [US3] Update shell active-route highlighting and aria-current behavior for remote routes in src/app/layout/shell-menu.component.ts
+- [x] T044 [US3] Add accessibility and visual-state refinements for remote menu entries in src/app/layout/shell-menu.component.scss
+- [x] T045 [US3] Ensure shell fallback copy includes destination-specific recovery messaging in src/app/layout/remote-unavailable.component.html
 
 **Checkpoint**: All user stories are independently complete and navigation clarity goals are met.
 
@@ -122,8 +122,8 @@
 
 **Purpose**: Final hardening, validation, and documentation updates spanning all stories.
 
-- [ ] T046 [P] Update federation compatibility and release coordination notes in specs/011-add-ocpi-gateways-remotes/research.md
-- [ ] T047 [P] Update operational validation checklist and local runbook in specs/011-add-ocpi-gateways-remotes/quickstart.md
+- [x] T046 [P] Update federation compatibility and release coordination notes in specs/011-add-ocpi-gateways-remotes/research.md
+- [x] T047 [P] Update operational validation checklist and local runbook in specs/011-add-ocpi-gateways-remotes/quickstart.md
 - [ ] T048 Run shell lint, unit, integration, and e2e validation commands in package.json
 - [ ] T049 [P] Run OCPI remote lint, unit tests, and build verification in ../mf-ocpi/package.json
 - [ ] T050 [P] Run Gateways remote lint, unit tests, and build verification in ../mf-gateways/package.json

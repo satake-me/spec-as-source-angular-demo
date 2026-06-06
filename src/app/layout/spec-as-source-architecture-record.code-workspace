@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "../../../../spec-as-source-architecture-record"
+		},
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../mf-gateways"
+		}
+	],
+	"settings": {
+		"chat.tools.terminal.autoApprove": {
+			".specify/scripts/bash/": true,
+			".specify/scripts/powershell/": true
+		}
+	}
+}

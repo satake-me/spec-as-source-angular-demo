@@ -163,6 +163,15 @@
   font-weight: 600;
 }
 
+a[mat-list-item][aria-current='page'] {
+  font-weight: 600;
+  color: var(--mat-sys-primary);
+}
+
+a[mat-list-item][aria-current='page'] .mat-icon {
+  color: var(--mat-sys-primary);
+}
+
 @media (max-width: 767px) {
   .layout-shell__clock-slot {
     display: none;

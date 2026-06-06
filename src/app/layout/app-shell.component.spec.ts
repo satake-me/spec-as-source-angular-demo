@@ -79,6 +79,26 @@ describe('AppShellComponent', () => {
         },
       ],
     },
+    {
+      id: 'ocpi',
+      label: 'OCPI',
+      route: '/ocpi',
+      icon: 'ev_station',
+      requiresAuth: true,
+      visibleWhenAuthenticated: true,
+      order: 40,
+      children: null,
+    },
+    {
+      id: 'gateways',
+      label: 'Gateways',
+      route: '/gateways',
+      icon: 'hub',
+      requiresAuth: true,
+      visibleWhenAuthenticated: true,
+      order: 50,
+      children: null,
+    },
   ];
 
   const session = signal({
@@ -129,6 +149,8 @@ describe('AppShellComponent', () => {
           { path: 'home', component: AppShellComponent },
           { path: 'account', component: AppShellComponent },
           { path: 'world-clock', component: AppShellComponent },
+          { path: 'ocpi', component: AppShellComponent },
+          { path: 'gateways', component: AppShellComponent },
         ]),
         {
           provide: BreakpointObserver,
@@ -221,6 +243,48 @@ describe('AppShellComponent', () => {
 
     const compiledAfter = fixture.nativeElement as HTMLElement;
     expect(compiledAfter.textContent).toContain('Home');
+    expect(compiledAfter.textContent).toContain('OCPI');
+    expect(compiledAfter.textContent).toContain('Gateways');
+  });
+
+  it('keeps OCPI and Gateways as distinct top-level links', () => {
+    session.set({
+      ...session(),
+      status: 'authenticated',
+      isAuthenticated: true,
+    });
+    isAuthenticated.set(true);
+
+    const fixture = TestBed.createComponent(AppShellComponent);
+    fixture.detectChanges();
+
+    const navLinks = Array.from(
+      fixture.nativeElement.querySelectorAll('a[mat-list-item]') as NodeListOf<HTMLAnchorElement>
+    ).map((element) => element.textContent?.trim());
+
+    expect(navLinks.some((label) => label?.includes('OCPI'))).toBe(true);
+    expect(navLinks.some((label) => label?.includes('Gateways'))).toBe(true);
+  });
+
+  it('sets aria-current on active remote navigation route', async () => {
+    session.set({
+      ...session(),
+      status: 'authenticated',
+      isAuthenticated: true,
+    });
+    isAuthenticated.set(true);
+
+    const router = TestBed.inject(Router);
+    const fixture = TestBed.createComponent(AppShellComponent);
+    await router.navigateByUrl('/ocpi');
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const ocpiLink = Array.from(
+      fixture.nativeElement.querySelectorAll('a[mat-list-item]') as NodeListOf<HTMLAnchorElement>
+    ).find((element) => element.textContent?.includes('OCPI'));
+
+    expect(ocpiLink?.getAttribute('aria-current')).toBe('page');
   });
 
   it('renders a fallback message when menu configuration cannot be loaded', () => {

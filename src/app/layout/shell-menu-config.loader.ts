@@ -17,7 +17,21 @@ export class ShellMenuConfigLoader {
   loadMenu(): Observable<SidebarMenuLoadResult> {
     return this.httpClient.get<unknown>(RUNTIME_SIDEBAR_MENU_CONFIG_PATH).pipe(
       map((payload) => {
-        const items = normalizeSidebarMenuConfig(payload);
+        const items = normalizeSidebarMenuConfig(payload).map((item) => ({
+          ...item,
+          children:
+            item.children === null
+              ? null
+              : [...item.children].sort((left, right) => {
+                  const orderDelta = left.order - right.order;
+                  return orderDelta !== 0 ? orderDelta : left.id.localeCompare(right.id);
+                }),
+        }));
+
+        items.sort((left, right) => {
+          const orderDelta = left.order - right.order;
+          return orderDelta !== 0 ? orderDelta : left.id.localeCompare(right.id);
+        });
 
         return {
           status: 'ready',

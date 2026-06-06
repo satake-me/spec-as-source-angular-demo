@@ -25,6 +25,24 @@ Add two independently hosted Angular remotes (OCPI and Gateways) and integrate b
 - Initialize `mf-gateways` with the same architecture and conventions.
 - In each remote, expose `./routes` and `remoteRoutes` entry.
 
+Bootstrap sequence used for this feature slice:
+
+```bash
+# from /home/thiago/develop/sources/github.com/satake-me
+mkdir -p mf-ocpi/src/app/features/ocpi mf-ocpi/src/federation
+mkdir -p mf-gateways/src/app/features/gateways mf-gateways/src/federation
+```
+
+Scaffolded remote files:
+- `mf-ocpi/package.json`
+- `mf-ocpi/src/app/app.routes.ts`
+- `mf-ocpi/src/app/features/ocpi/ocpi-home-page.component.ts`
+- `mf-ocpi/src/federation/exposes.routes.ts`
+- `mf-gateways/package.json`
+- `mf-gateways/src/app/app.routes.ts`
+- `mf-gateways/src/app/features/gateways/gateways-home-page.component.ts`
+- `mf-gateways/src/federation/exposes.routes.ts`
+
 ### 2. Add initial remote pages
 
 - In `mf-ocpi`, implement OCPI initial page at remote root route.
@@ -85,3 +103,4 @@ npm run build
 Notes:
 - Keep environment-specific remote endpoints out of hardcoded route definitions.
 - Align federation plugin/library versions between shell and remotes.
+- During shell-only local runs, unresolved remote endpoints should surface fallback UI rather than break shell navigation.

@@ -128,6 +128,8 @@
                       class="layout-shell__nested-item"
                       [routerLink]="child.route"
                       routerLinkActive="active-link"
+                      #childActive="routerLinkActive"
+                      [attr.aria-current]="childActive.isActive ? 'page' : null"
                       (click)="closeSidenavOnNavigate()"
                     >
                       @if (child.icon; as icon) {
@@ -139,7 +141,14 @@
                 </div>
               }
             } @else {
-              <a mat-list-item [routerLink]="item.route" routerLinkActive="active-link" (click)="closeSidenavOnNavigate()">
+              <a
+                mat-list-item
+                [routerLink]="item.route"
+                routerLinkActive="active-link"
+                #topLevelActive="routerLinkActive"
+                [attr.aria-current]="topLevelActive.isActive ? 'page' : null"
+                (click)="closeSidenavOnNavigate()"
+              >
                 @if (item.icon; as icon) {
                   <mat-icon matListItemIcon>{{ icon }}</mat-icon>
                 }

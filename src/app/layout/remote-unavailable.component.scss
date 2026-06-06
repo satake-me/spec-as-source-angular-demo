@@ -1,0 +1,23 @@
+.remote-unavailable {
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 0.75rem;
+  background: var(--mat-sys-surface);
+  padding: 1rem;
+  max-width: 52rem;
+}
+
+.remote-unavailable__title {
+  margin: 0 0 0.5rem;
+  font: var(--mat-sys-title-large);
+}
+
+.remote-unavailable__message,
+.remote-unavailable__hint {
+  margin: 0;
+  color: var(--mat-sys-on-surface-variant);
+  font: var(--mat-sys-body-medium);
+}
+
+.remote-unavailable__hint {
+  margin-top: 0.5rem;
+}

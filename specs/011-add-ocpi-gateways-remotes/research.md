@@ -77,6 +77,17 @@ Both integrations must comply with ADR-002 and use Angular Native Federation / M
 - Keep remote initial pages minimal and independently bootable to accelerate CI feedback.
 - Treat remote URL and exposed-module contract checks as CI gates.
 
+## Federation compatibility and release coordination notes
+
+- Shell now consumes a typed runtime registry at `public/config/remotes.json` with `ocpi` and `gateways` entries.
+- Shell route loading path is centralized in `src/app/layout/shell-remote-loader.ts` and degrades to a standardized unavailable state.
+- OCPI and Gateways remotes expose `remoteRoutes` from `src/federation/exposes.routes.ts` in their own repositories.
+- Breaking changes to remote `id`, `routePath`, or exposed module key must be coordinated with a shell release that updates registry and route expectations.
+- Compatibility gate for releases:
+	1. Validate shell registry and route tests (`app.routes.spec.ts`, `shell-remote-registry.loader.spec.ts`).
+	2. Validate remote exposure tests (`exposes.routes.spec.ts` in both remotes).
+	3. Validate end-to-end navigation for `/ocpi` and `/gateways` with fallback behavior preserved.
+
 ## Resolved clarifications
 
 - Module Federation technology: Native Federation for Angular shell/remotes.

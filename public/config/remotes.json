@@ -1,0 +1,21 @@
+{
+  "version": "1",
+  "remotes": [
+    {
+      "id": "ocpi",
+      "routePath": "ocpi",
+      "displayName": "OCPI",
+      "remoteEntry": "http://localhost:4301/remoteEntry.json",
+      "exposedModule": "./routes",
+      "requiredPermissions": ["OCPI_VIEW"]
+    },
+    {
+      "id": "gateways",
+      "routePath": "gateways",
+      "displayName": "Gateways",
+      "remoteEntry": "http://localhost:4302/remoteEntry.json",
+      "exposedModule": "./routes",
+      "requiredPermissions": ["GATEWAYS_VIEW"]
+    }
+  ]
+}
