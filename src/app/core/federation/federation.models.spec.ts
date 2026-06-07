@@ -5,6 +5,7 @@ import {
 	FEDERATION_REMOTE_NAMES,
 	type FederationManifest,
 	type RemoteComponentContract,
+	type RemoteRoutesContract,
 	type RemoteRouteContract,
 } from './federation.models';
 
@@ -34,6 +35,14 @@ describe('federation.models', () => {
 		expect(contract.exposedModule).toBe('./Component');
 	});
 
+	it('keeps the remote routes contract boundary explicit', () => {
+		const contract = {
+			exposedModule: './Routes',
+		} satisfies RemoteRoutesContract;
+
+		expect(contract.exposedModule).toBe('./Routes');
+	});
+
 	it('keeps route metadata aligned with exposed component contracts', () => {
 		const remoteRoute = {
 			remoteName: 'mf1',
@@ -58,6 +67,16 @@ describe('federation.models', () => {
 				expect(FEDERATION_REMOTE_NAMES).toContain(contract.remoteName);
 				expect(contract.exposedModule).toBe('./Component');
 			}
+		});
+
+		it('keeps the OCPI remote routes module key stable for shell lazy loading', () => {
+			const routesContract = {
+				remoteName: 'ocpi-mfe',
+				exposedModule: './Routes',
+			} as const;
+
+			expect(FEDERATION_REMOTE_NAMES).toContain(routesContract.remoteName);
+			expect(routesContract.exposedModule).toBe('./Routes');
 		});
 
 		it('keeps host dependencies limited to published federation contracts', () => {

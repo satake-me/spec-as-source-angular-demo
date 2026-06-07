@@ -92,7 +92,7 @@ describe('app routes', () => {
       path: 'ocpi',
       data: { title: 'OCPI Modules', icon: 'hub' },
     });
-    expect(ocpiRoute?.loadComponent).toEqual(expect.any(Function));
+    expect(ocpiRoute?.loadChildren).toEqual(expect.any(Function));
   });
 
   it('protects the OCPI route using the authenticated route guard', () => {
@@ -122,22 +122,22 @@ describe('app routes', () => {
     expect(loadRemoteModuleMock).toHaveBeenCalledWith('mf2', './Component');
   });
 
-  it('resolves ocpi-mfe using the stable exposed module contract and export mapping', async () => {
-    class OcpiMfeComponent {}
+  it('resolves ocpi-mfe using the stable exposed route contract', async () => {
+    const remoteRoutes = [{ path: '', title: 'OCPI Modules' }];
 
-    loadRemoteModuleMock.mockResolvedValue({ OcpiMfeComponent });
-    const component = await findShellRoute('ocpi')?.loadComponent?.();
+    loadRemoteModuleMock.mockResolvedValue({ routes: remoteRoutes });
+    const routeChildren = await findShellRoute('ocpi')?.loadChildren?.();
 
-    expect(component).toBe(OcpiMfeComponent as unknown as Type<unknown>);
-    expect(loadRemoteModuleMock).toHaveBeenCalledWith('ocpi-mfe', './Component');
+    expect(routeChildren).toBe(remoteRoutes);
+    expect(loadRemoteModuleMock).toHaveBeenCalledWith('ocpi-mfe', './Routes');
   });
 
-  it('shows a friendly fallback page when a remote is unavailable', async () => {
+  it('shows a friendly fallback page when the OCPI route tree is unavailable', async () => {
     loadRemoteModuleMock.mockRejectedValue(new Error('Remote is offline'));
 
-    const component = await findShellRoute('ocpi')?.loadComponent?.();
+    const routeChildren = await findShellRoute('ocpi')?.loadChildren?.();
 
-    expect(component).toBe(RemoteUnavailablePageComponent as unknown as Type<unknown>);
+    expect(routeChildren).toEqual([{ path: '', component: RemoteUnavailablePageComponent }]);
   });
 
   it('keeps route definitions free from hardcoded remote entry URLs', () => {

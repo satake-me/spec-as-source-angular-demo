@@ -12,6 +12,10 @@ export interface RemoteComponentContract {
 	readonly exposedModule: './Component';
 }
 
+export interface RemoteRoutesContract {
+	readonly exposedModule: './Routes';
+}
+
 export interface RemoteRouteContract extends RemoteComponentContract {
 	readonly remoteName: FederationRemoteName;
 	readonly routePath: `/${string}`;

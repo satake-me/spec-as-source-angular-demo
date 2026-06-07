@@ -19,6 +19,15 @@ function loadRemoteComponent(remoteName: string, exportName: string): Promise<Ty
 	});
 }
 
+function loadRemoteRoutes(remoteName: string): Promise<Routes> {
+	return loadRemoteModule(remoteName, './Routes').then(
+		(module) => module.routes as Routes
+	).catch((error) => {
+		console.error(`Remote route tree for \"${remoteName}\" is not running at the moment.`, error);
+		return [{ path: '', component: RemoteUnavailablePageComponent }];
+	});
+}
+
 export const routes: Routes = [
 	{
 		path: '',
@@ -56,7 +65,7 @@ export const routes: Routes = [
 			},
 			{
 				path: 'ocpi',
-				loadComponent: () => loadRemoteComponent('ocpi-mfe', 'OcpiMfeComponent'),
+				loadChildren: () => loadRemoteRoutes('ocpi-mfe'),
 				canActivate: [canActivateAuthenticatedRoute],
 				data: { title: 'OCPI Modules', icon: 'hub' },
 			},
