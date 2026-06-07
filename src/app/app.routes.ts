@@ -69,6 +69,12 @@ export const routes: Routes = [
 				canActivate: [canActivateAuthenticatedRoute],
 				data: { title: 'OCPI Modules', icon: 'hub' },
 			},
+			{
+				path: 'payments',
+				loadChildren: () => loadRemoteRoutes('payments-mfe'),
+				canActivate: [canActivateAuthenticatedRoute],
+				data: { title: 'Gateway Payments', icon: 'payments' },
+			},
 		],
 	},
 	{

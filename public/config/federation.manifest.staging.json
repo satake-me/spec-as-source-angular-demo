@@ -1,5 +1,6 @@
 {
   "mf1": "https://mf1.staging.example.com/remoteEntry.json",
   "mf2": "https://mf2.staging.example.com/remoteEntry.json",
-  "ocpi-mfe": "https://ocpi-mfe.staging.example.com/remoteEntry.json"
+  "ocpi-mfe": "https://ocpi-mfe.staging.example.com/remoteEntry.json",
+  "payments-mfe": "https://payments-mfe.staging.example.com/remoteEntry.json"
 }

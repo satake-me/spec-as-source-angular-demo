@@ -95,11 +95,28 @@ describe('app routes', () => {
     expect(ocpiRoute?.loadChildren).toEqual(expect.any(Function));
   });
 
+  it('adds a Gateway Payments placeholder route in the shell tree', () => {
+    const paymentsRoute = findShellRoute('payments');
+
+    expect(paymentsRoute).toMatchObject({
+      path: 'payments',
+      data: { title: 'Gateway Payments', icon: 'payments' },
+    });
+    expect(paymentsRoute?.loadChildren).toEqual(expect.any(Function));
+  });
+
   it('protects the OCPI route using the authenticated route guard', () => {
     const ocpiRoute = findShellRoute('ocpi');
 
     expect(ocpiRoute?.canActivate?.length).toBe(1);
     expect(ocpiRoute?.canActivate?.[0]).toBe(canActivateAuthenticatedRoute);
+  });
+
+  it('protects the Gateway Payments route using the authenticated route guard', () => {
+    const paymentsRoute = findShellRoute('payments');
+
+    expect(paymentsRoute?.canActivate?.length).toBe(1);
+    expect(paymentsRoute?.canActivate?.[0]).toBe(canActivateAuthenticatedRoute);
   });
 
   it('resolves mf1 using the manifest remote name and stable exposed module key', async () => {
@@ -132,10 +149,28 @@ describe('app routes', () => {
     expect(loadRemoteModuleMock).toHaveBeenCalledWith('ocpi-mfe', './Routes');
   });
 
+  it('resolves payments-mfe using the stable exposed route contract', async () => {
+    const remoteRoutes = [{ path: '', title: 'Gateway Payments' }];
+
+    loadRemoteModuleMock.mockResolvedValue({ routes: remoteRoutes });
+    const routeChildren = await findShellRoute('payments')?.loadChildren?.();
+
+    expect(routeChildren).toBe(remoteRoutes);
+    expect(loadRemoteModuleMock).toHaveBeenCalledWith('payments-mfe', './Routes');
+  });
+
   it('shows a friendly fallback page when the OCPI route tree is unavailable', async () => {
     loadRemoteModuleMock.mockRejectedValue(new Error('Remote is offline'));
 
     const routeChildren = await findShellRoute('ocpi')?.loadChildren?.();
+
+    expect(routeChildren).toEqual([{ path: '', component: RemoteUnavailablePageComponent }]);
+  });
+
+  it('shows a friendly fallback page when the payments route tree is unavailable', async () => {
+    loadRemoteModuleMock.mockRejectedValue(new Error('Remote is offline'));
+
+    const routeChildren = await findShellRoute('payments')?.loadChildren?.();
 
     expect(routeChildren).toEqual([{ path: '', component: RemoteUnavailablePageComponent }]);
   });
@@ -147,5 +182,6 @@ describe('app routes', () => {
     expect(routeTree).not.toContain('http://localhost:4201');
     expect(routeTree).not.toContain('http://localhost:4202');
     expect(routeTree).not.toContain('http://localhost:4203');
+    expect(routeTree).not.toContain('http://localhost:4204');
   });
 });
