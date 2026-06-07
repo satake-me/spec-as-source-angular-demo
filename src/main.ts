@@ -4,8 +4,8 @@ import { formatRuntimeConfigError, renderRuntimeConfigError } from './app/core/c
 import { FEDERATION_MANIFEST_PATH } from './app/core/federation/federation.models';
 
 const APP_STARTUP_LOADING_ID = 'app-startup-loading';
-const APP_STARTUP_LOADING_MIN_VISIBLE_MS = 220;
-const APP_STARTUP_LOADING_FADE_MS = 280;
+const APP_STARTUP_LOADING_MIN_VISIBLE_MS = 900;
+const APP_STARTUP_LOADING_FADE_MS = 420;
 const STARTED_AT_MS = Date.now();
 
 function prefersReducedMotion(): boolean {

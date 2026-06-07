@@ -77,8 +77,8 @@ export class AppShellComponent {
 
   constructor() {
     this.appLoadingService.show('app-startup', {
-      minimumVisibleMs: 260,
-      fadeOutMs: 280,
+      minimumVisibleMs: 900,
+      fadeOutMs: 420,
     });
 
     if (this.authFacade.session().isAuthenticated) {

@@ -97,7 +97,28 @@
           #d675f9,
           #ff4d4d
         );
-      animation: app-startup-spin 1800ms linear infinite;
+      will-change: transform;
+      box-shadow: 0 0 0 rgba(113, 130, 255, 0.3);
+      animation:
+        app-startup-spin 1300ms linear infinite,
+        app-startup-bob 2200ms ease-in-out infinite,
+        app-startup-glow 1900ms ease-in-out infinite;
+    }
+
+    .app-startup-loading__spinner::before {
+      content: '';
+      position: absolute;
+      top: -0.4rem;
+      left: 50%;
+      width: 0.2rem;
+      height: 1rem;
+      margin-left: -0.1rem;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 123, 102, 0.96));
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.45),
+        0 0 10px rgba(255, 123, 102, 0.42);
+      z-index: 2;
     }
 
     .app-startup-loading__spinner::after {
@@ -106,6 +127,7 @@
       inset: 0.35rem;
       border-radius: inherit;
       background: color-mix(in srgb, white 82%, rgba(244, 247, 253, 0.6));
+      z-index: 1;
     }
 
     .app-startup-loading__title {
@@ -117,15 +139,38 @@
 
     .app-startup-loading__copy {
       margin: 0;
-      color: #526179;
-      font-size: 0.92rem;
-      line-height: 1.45;
-      max-width: 28ch;
+      color: #5f6f89;
+      font-size: 0.82rem;
+      font-weight: 500;
+      line-height: 1.35;
+      max-width: 32ch;
     }
 
     @keyframes app-startup-spin {
       to {
         transform: rotate(360deg);
+      }
+    }
+
+    @keyframes app-startup-bob {
+      0%,
+      100% {
+        translate: 0 0;
+      }
+
+      50% {
+        translate: 0 -0.12rem;
+      }
+    }
+
+    @keyframes app-startup-glow {
+      0%,
+      100% {
+        box-shadow: 0 0 0 rgba(113, 130, 255, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 20px rgba(113, 130, 255, 0.4);
       }
     }
 
@@ -145,8 +190,14 @@
       }
 
       .app-startup-loading__spinner {
-        animation: none;
+        animation: app-startup-spin 1300ms linear infinite;
         background: linear-gradient(135deg, #ff7161, #f9ce58, #62d8a2, #67a7ff, #be73f7);
+      }
+
+      .app-startup-loading__spinner::before {
+        box-shadow:
+          0 0 0 2px rgba(255, 255, 255, 0.52),
+          0 0 14px rgba(255, 123, 102, 0.68);
       }
 
       .app-startup-loading__skeleton {
@@ -170,8 +221,8 @@
 
     <div class="app-startup-loading__card">
       <div class="app-startup-loading__spinner" aria-hidden="true"></div>
-      <p class="app-startup-loading__title">Loading application</p>
-      <p class="app-startup-loading__copy">Preparing the portal shell and remote applications. Please wait a moment.</p>
+      <p class="app-startup-loading__title">Loading workspace</p>
+      <p class="app-startup-loading__copy">Starting application shell and runtime config.</p>
     </div>
   </div>
   <app-root></app-root>
