@@ -18,6 +18,14 @@ import { AppShellComponent } from './layout/app-shell.component';
 
 const loadRemoteModuleMock = vi.mocked(loadRemoteModule);
 
+function getShellChildren() {
+  return routes[0]?.children ?? [];
+}
+
+function findShellRoute(path: string) {
+  return getShellChildren().find((route) => route.path === path);
+}
+
 describe('app routes', () => {
   beforeEach(() => {
     loadRemoteModuleMock.mockReset();
@@ -48,34 +56,57 @@ describe('app routes', () => {
   });
 
   it('protects the shell account child route and maps it to the account page component', () => {
-    expect(routes[0]?.children?.[2]).toMatchObject({
+    const accountRoute = findShellRoute('account');
+
+    expect(accountRoute).toMatchObject({
       path: 'account',
       component: AccountPageComponent,
     });
-    expect(routes[0]?.children?.[2]?.canActivate?.length).toBe(1);
+    expect(accountRoute?.canActivate?.length).toBe(1);
   });
 
   it('lazily loads the mf1 remote from the shell route tree', () => {
-    expect(routes[0]?.children?.[4]).toMatchObject({
+    const mf1Route = findShellRoute('mf1');
+
+    expect(mf1Route).toMatchObject({
       path: 'mf1',
       data: { title: 'Catalogo Federado', icon: 'storefront' },
     });
-    expect(routes[0]?.children?.[4]?.loadComponent).toEqual(expect.any(Function));
+    expect(mf1Route?.loadComponent).toEqual(expect.any(Function));
   });
 
   it('lazily loads the mf2 remote from the shell route tree', () => {
-    expect(routes[0]?.children?.[5]).toMatchObject({
+    const mf2Route = findShellRoute('mf2');
+
+    expect(mf2Route).toMatchObject({
       path: 'mf2',
       data: { title: 'Dashboard Operacional', icon: 'dashboard' },
     });
-    expect(routes[0]?.children?.[5]?.loadComponent).toEqual(expect.any(Function));
+    expect(mf2Route?.loadComponent).toEqual(expect.any(Function));
+  });
+
+  it('adds an OCPI placeholder route in the shell tree', () => {
+    const ocpiRoute = findShellRoute('ocpi');
+
+    expect(ocpiRoute).toMatchObject({
+      path: 'ocpi',
+      data: { title: 'OCPI Modules', icon: 'hub' },
+    });
+    expect(ocpiRoute?.loadComponent).toEqual(expect.any(Function));
+  });
+
+  it('protects the OCPI route using the authenticated route guard', () => {
+    const ocpiRoute = findShellRoute('ocpi');
+
+    expect(ocpiRoute?.canActivate?.length).toBe(1);
+    expect(ocpiRoute?.canActivate?.[0]).toBe(canActivateAuthenticatedRoute);
   });
 
   it('resolves mf1 using the manifest remote name and stable exposed module key', async () => {
     class Mf1Component {}
 
     loadRemoteModuleMock.mockResolvedValue({ Mf1Component });
-    const component = await routes[0]?.children?.[4]?.loadComponent?.();
+    const component = await findShellRoute('mf1')?.loadComponent?.();
 
     expect(component).toBe(Mf1Component as unknown as Type<unknown>);
     expect(loadRemoteModuleMock).toHaveBeenCalledWith('mf1', './Component');
@@ -85,16 +116,26 @@ describe('app routes', () => {
     class Mf2Component {}
 
     loadRemoteModuleMock.mockResolvedValue({ Mf2Component });
-    const component = await routes[0]?.children?.[5]?.loadComponent?.();
+    const component = await findShellRoute('mf2')?.loadComponent?.();
 
     expect(component).toBe(Mf2Component as unknown as Type<unknown>);
     expect(loadRemoteModuleMock).toHaveBeenCalledWith('mf2', './Component');
   });
 
+  it('resolves ocpi-mfe using the stable exposed module contract and export mapping', async () => {
+    class OcpiMfeComponent {}
+
+    loadRemoteModuleMock.mockResolvedValue({ OcpiMfeComponent });
+    const component = await findShellRoute('ocpi')?.loadComponent?.();
+
+    expect(component).toBe(OcpiMfeComponent as unknown as Type<unknown>);
+    expect(loadRemoteModuleMock).toHaveBeenCalledWith('ocpi-mfe', './Component');
+  });
+
   it('shows a friendly fallback page when a remote is unavailable', async () => {
     loadRemoteModuleMock.mockRejectedValue(new Error('Remote is offline'));
 
-    const component = await routes[0]?.children?.[4]?.loadComponent?.();
+    const component = await findShellRoute('ocpi')?.loadComponent?.();
 
     expect(component).toBe(RemoteUnavailablePageComponent as unknown as Type<unknown>);
   });
@@ -105,5 +146,6 @@ describe('app routes', () => {
     expect(routeTree).not.toContain('remoteEntry.json');
     expect(routeTree).not.toContain('http://localhost:4201');
     expect(routeTree).not.toContain('http://localhost:4202');
+    expect(routeTree).not.toContain('http://localhost:4203');
   });
 });

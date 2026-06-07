@@ -54,6 +54,12 @@ export const routes: Routes = [
 				loadComponent: () => loadRemoteComponent('mf2', 'Mf2Component'),
 				data: { title: 'Dashboard Operacional', icon: 'dashboard' },
 			},
+			{
+				path: 'ocpi',
+				loadComponent: () => loadRemoteComponent('ocpi-mfe', 'OcpiMfeComponent'),
+				canActivate: [canActivateAuthenticatedRoute],
+				data: { title: 'OCPI Modules', icon: 'hub' },
+			},
 		],
 	},
 	{

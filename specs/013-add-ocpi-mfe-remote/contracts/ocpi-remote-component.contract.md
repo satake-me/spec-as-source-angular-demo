@@ -19,8 +19,16 @@ Define the host-to-remote component boundary for `ocpi-mfe` integration.
 ## Stable Boundary
 
 - Host imports remote module via `loadRemoteModule('ocpi-mfe', './Component')`.
-- Host resolves a named export from the exposed module (implementation-specific symbol).
+- Host resolves `OcpiMfeComponent` from the exposed module for the `/ocpi` route.
 - Host must not import source files directly from `ocpi-mfe` repository.
+
+## Host Route Binding
+
+- Host path: `/ocpi`
+- Host route metadata:
+	- `title`: `OCPI Modules`
+	- `icon`: `hub`
+- Host fallback on failure: `RemoteUnavailablePageComponent`
 
 ## Expectations
 

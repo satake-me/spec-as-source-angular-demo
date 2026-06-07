@@ -49,3 +49,13 @@
 1. Make a non-breaking UI change in `ocpi-mfe`.
 2. Rebuild/restart only `ocpi-mfe`.
 3. Verify host reflects updated OCPI UI while host source remains unchanged.
+
+## Targeted Validation Commands
+
+Run these commands from the host repository root:
+
+```bash
+npm run test -- --watch=false --include src/app/app.routes.spec.ts
+npm run test:e2e -- e2e/ocpi-remote.spec.ts
+npm run test:e2e -- e2e/independent-remotes.spec.ts
+```

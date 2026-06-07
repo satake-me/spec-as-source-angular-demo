@@ -52,6 +52,16 @@
       "children": null
     },
     {
+      "id": "ocpi_mfe",
+      "label": "OCPI Modules",
+      "route": "/ocpi",
+      "icon": "hub",
+      "requiresAuth": true,
+      "visibleWhenAuthenticated": true,
+      "order": 15,
+      "children": null
+    },
+    {
       "id": "ocpi_modules",
       "label": "OCPI Modules",
       "route": null,

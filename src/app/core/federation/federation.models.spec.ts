@@ -11,17 +11,19 @@ import {
 describe('federation.models', () => {
 	it('publishes the manifest path and remote names used by the host', () => {
 		expect(FEDERATION_MANIFEST_PATH).toBe('/config/federation.manifest.json');
-		expect(FEDERATION_REMOTE_NAMES).toEqual(['mf1', 'mf2']);
+		expect(FEDERATION_REMOTE_NAMES).toEqual(['mf1', 'mf2', 'ocpi-mfe']);
 	});
 
 	it('keeps the federation manifest shape stable for local remotes', () => {
 		const manifest = {
 			mf1: 'http://localhost:4201/remoteEntry.json',
 			mf2: 'http://localhost:4202/remoteEntry.json',
+			'ocpi-mfe': 'http://localhost:4203/remoteEntry.json',
 		} satisfies FederationManifest;
 
 		expect(manifest.mf1).toContain('4201');
 		expect(manifest.mf2).toContain('4202');
+		expect(manifest['ocpi-mfe']).toContain('4203');
 	});
 
 	it('keeps the remote component contract boundary explicit', () => {
@@ -49,6 +51,7 @@ describe('federation.models', () => {
 			const publishedContracts = [
 				{ remoteName: 'mf1', exposedModule: './Component' },
 				{ remoteName: 'mf2', exposedModule: './Component' },
+				{ remoteName: 'ocpi-mfe', exposedModule: './Component' },
 			] as const;
 
 			for (const contract of publishedContracts) {
@@ -65,7 +68,7 @@ describe('federation.models', () => {
 			};
 
 			expect(publishedDependencies.manifestPath).toBe('/config/federation.manifest.json');
-			expect(publishedDependencies.remoteNames).toEqual(['mf1', 'mf2']);
+			expect(publishedDependencies.remoteNames).toEqual(['mf1', 'mf2', 'ocpi-mfe']);
 			expect(publishedDependencies.exposedModule).toBe('./Component');
 		});
 });

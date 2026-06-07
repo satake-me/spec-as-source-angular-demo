@@ -14,6 +14,13 @@ Define the runtime manifest contract to register the new `ocpi-mfe` remote along
 }
 ```
 
+## Environment Examples
+
+- `public/federation.manifest.json`: `ocpi-mfe` -> `http://localhost:4203/remoteEntry.json`
+- `public/config/federation.manifest.development.json`: `ocpi-mfe` -> `http://localhost:4203/remoteEntry.json`
+- `public/config/federation.manifest.staging.json`: `ocpi-mfe` -> `https://ocpi-mfe.staging.example.com/remoteEntry.json`
+- `public/config/federation.manifest.production.json`: `ocpi-mfe` -> `https://ocpi-mfe.example.com/remoteEntry.json`
+
 ## Rules
 
 - Manifest keys are stable remote identifiers consumed by host loader.

@@ -7,9 +7,9 @@
 
 **Purpose**: Prepare test surfaces and route/menu integration baseline for OCPI remote work.
 
-- [ ] T001 Add OCPI route placeholder assertions in src/app/app.routes.spec.ts
-- [ ] T002 [P] Create OCPI end-to-end spec scaffold in e2e/ocpi-remote.spec.ts
-- [ ] T003 [P] Add OCPI menu item fixture placeholder in public/config/sidebar-menu.json
+- [x] T001 Add OCPI route placeholder assertions in src/app/app.routes.spec.ts
+- [x] T002 [P] Create OCPI end-to-end spec scaffold in e2e/ocpi-remote.spec.ts
+- [x] T003 [P] Add OCPI menu item fixture placeholder in public/config/sidebar-menu.json
 
 ---
 
@@ -19,12 +19,12 @@
 
 **⚠️ CRITICAL**: No user story implementation starts before this phase is complete.
 
-- [ ] T004 Register `ocpi-mfe` in public/federation.manifest.json
-- [ ] T005 [P] Register `ocpi-mfe` in public/config/federation.manifest.development.json
-- [ ] T006 [P] Register `ocpi-mfe` in public/config/federation.manifest.staging.json
-- [ ] T007 [P] Register `ocpi-mfe` in public/config/federation.manifest.production.json
-- [ ] T008 Add lazy-loaded `/ocpi` remote route using `loadRemoteComponent('ocpi-mfe', 'OcpiMfeComponent')` in src/app/app.routes.ts
-- [ ] T009 Extend route-level remote contract tests for `ocpi-mfe` resolution and fallback behavior in src/app/app.routes.spec.ts
+- [x] T004 Register `ocpi-mfe` in public/federation.manifest.json
+- [x] T005 [P] Register `ocpi-mfe` in public/config/federation.manifest.development.json
+- [x] T006 [P] Register `ocpi-mfe` in public/config/federation.manifest.staging.json
+- [x] T007 [P] Register `ocpi-mfe` in public/config/federation.manifest.production.json
+- [x] T008 Add lazy-loaded `/ocpi` remote route using `loadRemoteComponent('ocpi-mfe', 'OcpiMfeComponent')` in src/app/app.routes.ts
+- [x] T009 Extend route-level remote contract tests for `ocpi-mfe` resolution and fallback behavior in src/app/app.routes.spec.ts
 
 **Checkpoint**: Federation manifest + base OCPI route are ready.
 
@@ -38,14 +38,14 @@
 
 ### Tests for User Story 1
 
-- [ ] T010 [P] [US1] Add route metadata and shell child-route assertions for `/ocpi` in src/app/app.routes.spec.ts
-- [ ] T011 [P] [US1] Add e2e happy-path navigation test for OCPI route render in e2e/ocpi-remote.spec.ts
+- [x] T010 [P] [US1] Add route metadata and shell child-route assertions for `/ocpi` in src/app/app.routes.spec.ts
+- [x] T011 [P] [US1] Add e2e happy-path navigation test for OCPI route render in e2e/ocpi-remote.spec.ts
 
 ### Implementation for User Story 1
 
-- [ ] T012 [US1] Add top-level OCPI menu entry pointing to `/ocpi` in public/config/sidebar-menu.json
-- [ ] T013 [US1] Ensure route title/icon metadata for OCPI entry in src/app/app.routes.ts
-- [ ] T014 [US1] Validate OCPI menu visibility/auth flags follow existing mf1/mf2 navigation pattern in public/config/sidebar-menu.json
+- [x] T012 [US1] Add top-level OCPI menu entry pointing to `/ocpi` in public/config/sidebar-menu.json
+- [x] T013 [US1] Ensure route title/icon metadata for OCPI entry in src/app/app.routes.ts
+- [x] T014 [US1] Validate OCPI menu visibility/auth flags follow existing mf1/mf2 navigation pattern in public/config/sidebar-menu.json
 
 **Checkpoint**: User Story 1 is independently functional.
 
@@ -59,14 +59,14 @@
 
 ### Tests for User Story 2
 
-- [ ] T015 [P] [US2] Add e2e fallback test that aborts OCPI `remoteEntry.json` and verifies recoverable UI in e2e/ocpi-remote.spec.ts
-- [ ] T016 [P] [US2] Extend hardcoded-URL regression assertion to include `http://localhost:4203` exclusion in src/app/app.routes.spec.ts
+- [x] T015 [P] [US2] Add e2e fallback test that aborts OCPI `remoteEntry.json` and verifies recoverable UI in e2e/ocpi-remote.spec.ts
+- [x] T016 [P] [US2] Extend hardcoded-URL regression assertion to include `http://localhost:4203` exclusion in src/app/app.routes.spec.ts
 
 ### Implementation for User Story 2
 
-- [ ] T017 [US2] Set development OCPI remote entry to `http://localhost:4203/remoteEntry.json` in public/federation.manifest.json
-- [ ] T018 [US2] Ensure development config mirror for OCPI remote in public/config/federation.manifest.development.json
-- [ ] T019 [US2] Keep staging/production OCPI manifest entries environment-specific in public/config/federation.manifest.staging.json and public/config/federation.manifest.production.json
+- [x] T017 [US2] Set development OCPI remote entry to `http://localhost:4203/remoteEntry.json` in public/federation.manifest.json
+- [x] T018 [US2] Ensure development config mirror for OCPI remote in public/config/federation.manifest.development.json
+- [x] T019 [US2] Keep staging/production OCPI manifest entries environment-specific in public/config/federation.manifest.staging.json and public/config/federation.manifest.production.json
 
 **Checkpoint**: User Story 2 is independently functional.
 
@@ -80,13 +80,13 @@
 
 ### Tests for User Story 3
 
-- [ ] T020 [P] [US3] Add contract-level test for `loadRemoteModule('ocpi-mfe', './Component')` and expected export mapping in src/app/app.routes.spec.ts
-- [ ] T021 [P] [US3] Add resilience test proving other remotes remain usable when OCPI is unavailable in e2e/independent-remotes.spec.ts
+- [x] T020 [P] [US3] Add contract-level test for `loadRemoteModule('ocpi-mfe', './Component')` and expected export mapping in src/app/app.routes.spec.ts
+- [x] T021 [P] [US3] Add resilience test proving other remotes remain usable when OCPI is unavailable in e2e/independent-remotes.spec.ts
 
 ### Implementation for User Story 3
 
-- [ ] T022 [US3] Document OCPI host-consumption contract and no-source-import boundary in specs/013-add-ocpi-mfe-remote/contracts/ocpi-remote-component.contract.md
-- [ ] T023 [US3] Update independent run/recovery workflow for OCPI remote in specs/013-add-ocpi-mfe-remote/quickstart.md
+- [x] T022 [US3] Document OCPI host-consumption contract and no-source-import boundary in specs/013-add-ocpi-mfe-remote/contracts/ocpi-remote-component.contract.md
+- [x] T023 [US3] Update independent run/recovery workflow for OCPI remote in specs/013-add-ocpi-mfe-remote/quickstart.md
 
 **Checkpoint**: User Story 3 is independently functional.
 
@@ -96,8 +96,8 @@
 
 **Purpose**: Final consistency, docs, and verification across all stories.
 
-- [ ] T024 [P] Align federation manifest contract examples with final OCPI key across docs in specs/013-add-ocpi-mfe-remote/contracts/federation-manifest.contract.md
-- [ ] T025 Run full targeted validation (`app.routes.spec.ts`, OCPI e2e, independent remotes e2e) and record command set in specs/013-add-ocpi-mfe-remote/quickstart.md
+- [x] T024 [P] Align federation manifest contract examples with final OCPI key across docs in specs/013-add-ocpi-mfe-remote/contracts/federation-manifest.contract.md
+- [x] T025 Run full targeted validation (`app.routes.spec.ts`, OCPI e2e, independent remotes e2e) and record command set in specs/013-add-ocpi-mfe-remote/quickstart.md
 
 ---
 
