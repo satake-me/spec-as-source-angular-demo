@@ -11,9 +11,9 @@
 
 **Purpose**: Prepare feature scaffolding and baseline loading contracts.
 
-- [ ] T001 Create loading feature folder and placeholder barrel in src/app/core/loading/index.ts
-- [ ] T002 Create loading overlay component files in src/app/layout/loading-overlay.component.ts
-- [ ] T003 [P] Add feature test target placeholder for loading journey in e2e/loading-overlay.spec.ts
+- [x] T001 Create loading feature folder and placeholder barrel in src/app/core/loading/index.ts
+- [x] T002 Create loading overlay component files in src/app/layout/loading-overlay.component.ts
+- [x] T003 [P] Add feature test target placeholder for loading journey in e2e/loading-overlay.spec.ts
 
 ---
 
@@ -23,12 +23,12 @@
 
 **CRITICAL**: No user story implementation starts before this phase is complete.
 
-- [ ] T004 Define typed loading state contracts in src/app/core/loading/app-loading.models.ts
-- [ ] T005 Implement signal-based loading service lifecycle in src/app/core/loading/app-loading.service.ts
-- [ ] T006 [P] Add service regression tests for show/complete/hideNow transitions in src/app/core/loading/app-loading.service.spec.ts
-- [ ] T007 Register loading service provider in src/app/app.config.ts
-- [ ] T008 Wire startup completion handoff from bootstrap to loading lifecycle in src/main.ts
-- [ ] T009 Add startup overlay root hooks for class-based exit states in src/index.html
+- [x] T004 Define typed loading state contracts in src/app/core/loading/app-loading.models.ts
+- [x] T005 Implement signal-based loading service lifecycle in src/app/core/loading/app-loading.service.ts
+- [x] T006 [P] Add service regression tests for show/complete/hideNow transitions in src/app/core/loading/app-loading.service.spec.ts
+- [x] T007 Register loading service provider in src/app/app.config.ts
+- [x] T008 Wire startup completion handoff from bootstrap to loading lifecycle in src/main.ts
+- [x] T009 Add startup overlay root hooks for class-based exit states in src/index.html
 
 **Checkpoint**: Foundation complete. User story work can proceed.
 
@@ -42,17 +42,17 @@
 
 ### Tests for User Story 1
 
-- [ ] T010 [P] [US1] Add component test coverage for loader visibility and phase classes in src/app/layout/loading-overlay.component.spec.ts
-- [ ] T011 [P] [US1] Add startup handoff behavior assertions in src/app/app.component.spec.ts
-- [ ] T012 [P] [US1] Add e2e verification for overlay visibility and fade-out timing in e2e/loading-overlay.spec.ts
+- [x] T010 [P] [US1] Add component test coverage for loader visibility and phase classes in src/app/layout/loading-overlay.component.spec.ts
+- [x] T011 [P] [US1] Add startup handoff behavior assertions in src/app/app.component.spec.ts
+- [x] T012 [P] [US1] Add e2e verification for overlay visibility and fade-out timing in e2e/loading-overlay.spec.ts
 
 ### Implementation for User Story 1
 
-- [ ] T013 [P] [US1] Implement overlay component state bindings and accessibility attributes in src/app/layout/loading-overlay.component.ts
-- [ ] T014 [P] [US1] Implement centered rainbow loader markup in src/app/layout/loading-overlay.component.html
-- [ ] T015 [US1] Implement rainbow animation, center alignment, and fade-out transitions in src/app/layout/loading-overlay.component.scss
-- [ ] T016 [US1] Mount loading overlay component in shell layout in src/app/layout/app-shell.component.html
-- [ ] T017 [US1] Connect shell overlay visibility to loading service signals in src/app/layout/app-shell.component.ts
+- [x] T013 [P] [US1] Implement overlay component state bindings and accessibility attributes in src/app/layout/loading-overlay.component.ts
+- [x] T014 [P] [US1] Implement centered rainbow loader markup in src/app/layout/loading-overlay.component.html
+- [x] T015 [US1] Implement rainbow animation, center alignment, and fade-out transitions in src/app/layout/loading-overlay.component.scss
+- [x] T016 [US1] Mount loading overlay component in shell layout in src/app/layout/app-shell.component.html
+- [x] T017 [US1] Connect shell overlay visibility to loading service signals in src/app/layout/app-shell.component.ts
 
 **Checkpoint**: User Story 1 is fully functional and testable as MVP.
 
@@ -66,16 +66,16 @@
 
 ### Tests for User Story 2
 
-- [ ] T018 [P] [US2] Add component assertions for skeleton region rendering in src/app/layout/loading-overlay.component.spec.ts
-- [ ] T019 [P] [US2] Add viewport-focused e2e checks for sidebar/topbar/content skeleton regions in e2e/loading-overlay.spec.ts
+- [x] T018 [P] [US2] Add component assertions for skeleton region rendering in src/app/layout/loading-overlay.component.spec.ts
+- [x] T019 [P] [US2] Add viewport-focused e2e checks for sidebar/topbar/content skeleton regions in e2e/loading-overlay.spec.ts
 
 ### Implementation for User Story 2
 
-- [ ] T020 [P] [US2] Add typed skeleton layout region model in src/app/core/loading/app-loading.models.ts
-- [ ] T021 [US2] Implement skeleton region template structure in src/app/layout/loading-overlay.component.html
-- [ ] T022 [US2] Implement blur, transparency, and neutral skeleton palette styling in src/app/layout/loading-overlay.component.scss
-- [ ] T023 [US2] Tune overlay layer ordering and pointer blocking in src/app/layout/loading-overlay.component.scss
-- [ ] T024 [US2] Verify shell content remains unchanged beneath overlay integration in src/app/layout/app-shell.component.html
+- [x] T020 [P] [US2] Add typed skeleton layout region model in src/app/core/loading/app-loading.models.ts
+- [x] T021 [US2] Implement skeleton region template structure in src/app/layout/loading-overlay.component.html
+- [x] T022 [US2] Implement blur, transparency, and neutral skeleton palette styling in src/app/layout/loading-overlay.component.scss
+- [x] T023 [US2] Tune overlay layer ordering and pointer blocking in src/app/layout/loading-overlay.component.scss
+- [x] T024 [US2] Verify shell content remains unchanged beneath overlay integration in src/app/layout/app-shell.component.html
 
 **Checkpoint**: User Stories 1 and 2 both work independently and together.
 
@@ -89,16 +89,16 @@
 
 ### Tests for User Story 3
 
-- [ ] T025 [P] [US3] Add reduced-motion behavior tests for service timing rules in src/app/core/loading/app-loading.service.spec.ts
-- [ ] T026 [P] [US3] Add component tests for reduced-motion classes and polish states in src/app/layout/loading-overlay.component.spec.ts
-- [ ] T027 [P] [US3] Add e2e scenario for reduced-motion preference rendering in e2e/loading-overlay.spec.ts
+- [x] T025 [P] [US3] Add reduced-motion behavior tests for service timing rules in src/app/core/loading/app-loading.service.spec.ts
+- [x] T026 [P] [US3] Add component tests for reduced-motion classes and polish states in src/app/layout/loading-overlay.component.spec.ts
+- [x] T027 [P] [US3] Add e2e scenario for reduced-motion preference rendering in e2e/loading-overlay.spec.ts
 
 ### Implementation for User Story 3
 
-- [ ] T028 [P] [US3] Add reduced-motion detection and state mapping in src/app/core/loading/app-loading.service.ts
-- [ ] T029 [US3] Add subtle depth-of-field and gentle lighting layer styles in src/app/layout/loading-overlay.component.scss
-- [ ] T030 [US3] Add reduced-motion CSS fallback rules in src/app/layout/loading-overlay.component.scss
-- [ ] T031 [US3] Update startup inline fallback styles for consistency with reduced-motion defaults in src/index.html
+- [x] T028 [P] [US3] Add reduced-motion detection and state mapping in src/app/core/loading/app-loading.service.ts
+- [x] T029 [US3] Add subtle depth-of-field and gentle lighting layer styles in src/app/layout/loading-overlay.component.scss
+- [x] T030 [US3] Add reduced-motion CSS fallback rules in src/app/layout/loading-overlay.component.scss
+- [x] T031 [US3] Update startup inline fallback styles for consistency with reduced-motion defaults in src/index.html
 
 **Checkpoint**: All user stories are independently functional.
 
@@ -108,11 +108,11 @@
 
 **Purpose**: Final hardening, consistency checks, and documentation updates.
 
-- [ ] T032 [P] Align loading constants and exported type names for clarity in src/app/core/loading/app-loading.models.ts
-- [ ] T033 [P] Remove obsolete startup spinner-only styles in src/index.html
-- [ ] T034 Run feature-focused Angular tests and capture notes in specs/014-rainbow-loading-screen/quickstart.md
-- [ ] T035 [P] Run e2e loading overlay validation and document expected evidence in specs/014-rainbow-loading-screen/quickstart.md
-- [ ] T036 Update implementation notes and completion checklist in specs/014-rainbow-loading-screen/plan.md
+- [x] T032 [P] Align loading constants and exported type names for clarity in src/app/core/loading/app-loading.models.ts
+- [x] T033 [P] Remove obsolete startup spinner-only styles in src/index.html
+- [x] T034 Run feature-focused Angular tests and capture notes in specs/014-rainbow-loading-screen/quickstart.md
+- [x] T035 [P] Run e2e loading overlay validation and document expected evidence in specs/014-rainbow-loading-screen/quickstart.md
+- [x] T036 Update implementation notes and completion checklist in specs/014-rainbow-loading-screen/plan.md
 
 ---
 

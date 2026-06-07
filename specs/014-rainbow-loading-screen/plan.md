@@ -90,3 +90,9 @@ e2e/
 ## Complexity Tracking
 
 No constitution violations detected. No complexity exceptions required.
+
+## Implementation Status
+
+- Completed: loading state models/service, startup rainbow overlay in `src/index.html`, startup fade-out handoff in `src/main.ts`, Angular overlay component integration in shell, and targeted unit/component tests.
+- Validation: `ng test` targeted run passed for loading and shell specs.
+- Environment blocker: Playwright e2e launch failed due missing system library `libnspr4.so` in runtime environment.

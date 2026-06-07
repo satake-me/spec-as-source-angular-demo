@@ -34,10 +34,15 @@
 Run these from repository root:
 
 ```bash
-npm run test -- --watch=false --include src/app/app.component.spec.ts
-npm run test -- --watch=false --include src/app/layout/app-shell.component.spec.ts
-npm run test:e2e -- e2e/header-clock.spec.ts
+npm run test -- --watch=false --include src/app/core/loading/app-loading.service.spec.ts --include src/app/layout/loading-overlay.component.spec.ts --include src/app/app.component.spec.ts --include src/app/layout/app-shell.component.spec.ts
+npm run test:e2e -- e2e/loading-overlay.spec.ts
 ```
+
+## Validation Notes (2026-06-07)
+
+- Angular targeted tests passed: 4 files, 26 tests.
+- New e2e suite was executed, but browser launch failed in this environment due missing Linux shared library `libnspr4.so`.
+- Playwright Chromium binaries were installed successfully via `npx playwright install chromium`; remaining blocker is host OS dependency installation.
 
 ## Manual Regression Checklist
 

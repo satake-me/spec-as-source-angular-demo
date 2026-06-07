@@ -11,8 +11,10 @@ import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } fro
 import { filter } from 'rxjs';
 
 import { AuthFacade } from '../core/auth/auth.facade';
+import { AppLoadingService } from '../core/loading';
 import { CLOCK_MIN_WIDTH_QUERY, MOBILE_BREAKPOINT_QUERY } from './header-clock.constants';
 import { HeaderClockService } from './header-clock.service';
+import { LoadingOverlayComponent } from './loading-overlay.component';
 import { ShellMenuConfigLoader } from './shell-menu-config.loader';
 import { SidebarMenuChildItem, SidebarMenuItem } from './shell-menu.models';
 import { APP_LAYOUT_SECTIONS, filterMenuItemsForAuth, ShellLayoutState } from './shell-navigation.models';
@@ -29,6 +31,7 @@ type MenuLoadStatus = 'loading' | 'ready' | 'error';
     MatMenuModule,
     MatSidenavModule,
     MatToolbarModule,
+    LoadingOverlayComponent,
     RouterLink,
     RouterLinkActive,
     RouterOutlet,
@@ -38,6 +41,7 @@ type MenuLoadStatus = 'loading' | 'ready' | 'error';
 })
 export class AppShellComponent {
   private readonly authFacade = inject(AuthFacade);
+  private readonly appLoadingService = inject(AppLoadingService);
   private readonly headerClockService = inject(HeaderClockService);
 
   readonly appVersion = '0.0.0';
@@ -45,6 +49,7 @@ export class AppShellComponent {
   private readonly router = inject(Router);
   private readonly menuConfigLoader = inject(ShellMenuConfigLoader);
   private readonly destroyRef = inject(DestroyRef);
+  private startupOverlaySettled = false;
 
   readonly layoutSections = APP_LAYOUT_SECTIONS;
   readonly isMobile = signal(false);
@@ -71,6 +76,11 @@ export class AppShellComponent {
   );
 
   constructor() {
+    this.appLoadingService.show('app-startup', {
+      minimumVisibleMs: 260,
+      fadeOutMs: 280,
+    });
+
     if (this.authFacade.session().isAuthenticated) {
       void this.authFacade.ensureProfileLoaded();
     }
@@ -159,6 +169,11 @@ export class AppShellComponent {
         this.rawMenuItems.set(result.items);
         this.menuStatus.set(result.status);
         this.menuErrorMessage.set(result.errorMessage);
+
+        if (!this.startupOverlaySettled) {
+          this.startupOverlaySettled = true;
+          this.appLoadingService.complete('app-startup');
+        }
 
         const visibleParentIds = result.items
           .filter((item) => item.children !== null && item.children.length > 0)
