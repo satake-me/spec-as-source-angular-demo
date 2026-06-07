@@ -91,6 +91,13 @@ export class HomePageComponent {
   async navigateTo(route: string): Promise<void> {
     this.actionErrorMessage.set(null);
 
+    const currentRoute = this.normalizeRoute(this.router.url ?? '');
+    const targetRoute = this.normalizeRoute(route);
+
+    if (targetRoute === currentRoute) {
+      return;
+    }
+
     try {
       const navigated = await this.router.navigateByUrl(route);
       if (!navigated) {
@@ -117,5 +124,11 @@ export class HomePageComponent {
     }
 
     return `Open the ${entryLabel} portal view from the main workspace.`;
+  }
+
+  private normalizeRoute(route: string): string {
+    const [path] = route.split(/[?#]/);
+    const normalized = path.replace(/\/+$/, '');
+    return normalized.length === 0 ? '/' : normalized;
   }
 }

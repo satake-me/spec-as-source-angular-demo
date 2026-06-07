@@ -5,13 +5,13 @@
   min-width: 0;
   max-width: 100%;
   overflow: hidden;
-  background-color: var(--mat-sys-surface-container-low);
-  color: var(--mat-sys-on-surface);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: var(--app-shell-card-bg);
+  color: var(--app-shell-text-primary);
+  box-shadow: var(--app-shell-shadow);
   transition: box-shadow 0.2s ease;
 
   &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--app-shell-shadow-strong);
   }
 
   mat-card-header {
@@ -29,7 +29,7 @@
     font-weight: 500;
     line-height: 1.25;
     margin: 0;
-    color: var(--mat-sys-on-surface);
+    color: var(--app-shell-text-primary);
   }
 
   .country-flag {
@@ -51,7 +51,7 @@
 
   .city-name {
     font-size: var(--mat-sys-body-medium-size, 0.875rem);
-    color: var(--mat-sys-on-surface-variant);
+    color: var(--app-shell-text-secondary);
     line-height: 1.35;
     margin: 0.25rem 0 0;
   }
@@ -69,7 +69,7 @@
     min-width: 0;
     margin: 1.5rem 0;
     letter-spacing: 0.04em;
-    color: var(--mat-sys-on-surface);
+    color: var(--app-shell-text-primary);
     line-height: 1.2;
     overflow: hidden;
   }
@@ -90,29 +90,29 @@
   }
 
   .analog-clock__face {
-    fill: var(--mat-sys-surface);
-    stroke: var(--mat-sys-outline-variant);
+    fill: color-mix(in srgb, white 85%, var(--app-shell-card-bg));
+    stroke: var(--app-shell-outline);
     stroke-width: 2;
   }
 
   .analog-clock__center {
-    fill: var(--mat-sys-on-surface);
+    fill: var(--app-shell-text-primary);
   }
 
   .analog-clock__marker {
-    stroke: var(--mat-sys-outline);
+    stroke: var(--app-shell-outline);
     stroke-width: 1.5;
     opacity: 0.75;
   }
 
   .analog-clock__marker--major {
-    stroke: var(--mat-sys-on-surface-variant);
+    stroke: var(--app-shell-text-secondary);
     stroke-width: 2.25;
     opacity: 0.95;
   }
 
   .analog-clock__numerals {
-    fill: var(--mat-sys-on-surface-variant);
+    fill: var(--app-shell-text-secondary);
     font-family: 'Roboto Mono', monospace;
     font-size: 13px;
     font-weight: 500;
@@ -127,38 +127,38 @@
   }
 
   .analog-clock__hand--hour {
-    stroke: var(--mat-sys-on-surface);
+    stroke: var(--app-shell-text-primary);
     stroke-width: 5;
   }
 
   .analog-clock__hand--minute {
-    stroke: var(--mat-sys-on-surface);
+    stroke: var(--app-shell-text-primary);
     stroke-width: 3;
   }
 
   .analog-clock__hand--second {
-    stroke: var(--mat-sys-primary);
+    stroke: var(--app-shell-link);
     stroke-width: 2;
   }
 
   .utc-offset {
     font-size: var(--mat-sys-label-small-size, 0.75rem);
     font-weight: 500;
-    color: var(--mat-sys-on-surface-variant);
+    color: var(--app-shell-text-secondary);
     text-align: center;
     margin: 0.5rem 0 0 0;
   }
 }
 
 .clock-card--zero-meridian {
-  border: 1px solid color-mix(in srgb, var(--mat-sys-primary) 24%, var(--mat-sys-outline-variant));
+  border: 1px solid color-mix(in srgb, #5cb8ff 30%, var(--app-shell-outline));
   background:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--mat-sys-primary-container) 20%, transparent) 0%,
+      color-mix(in srgb, #5cb8ff 16%, transparent) 0%,
       transparent 48%
     ),
-    var(--mat-sys-surface-container-low);
+    var(--app-shell-card-bg);
 }
 
 @media (min-width: 960px) and (max-width: 1280px) {

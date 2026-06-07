@@ -11,17 +11,22 @@
 }
 
 .layout-shell__header {
-  border-bottom: 1px solid var(--mat-sys-outline-variant);
-  background: var(--mat-sys-surface);
+  border-bottom: 1px solid var(--app-shell-outline);
+  background: var(--app-shell-card-bg);
 }
 
 .layout-shell__toolbar {
   position: relative;
   min-height: 4rem;
+  --mat-toolbar-container-background-color: var(--app-shell-card-bg);
+  --mat-toolbar-container-text-color: var(--app-shell-text-primary);
+  background: var(--app-shell-card-bg);
+  color: var(--app-shell-text-primary);
 }
 
 .layout-shell__menu-toggle {
   margin-right: 0.5rem;
+  color: var(--app-shell-text-primary);
 }
 
 .layout-shell__brand {
@@ -56,11 +61,12 @@
   gap: 0.5rem;
   border-radius: 999px;
   padding: 0.25rem 0.75rem;
-  background: color-mix(in srgb, var(--mat-sys-surface-container-high) 82%, transparent);
-  color: var(--mat-sys-on-surface);
+  background: color-mix(in srgb, #d7e3f5 68%, #bfcfe8 32%);
+  color: color-mix(in srgb, var(--app-shell-text-primary) 82%, #1f2c40);
   font-family: 'Roboto Mono', 'Courier New', monospace;
   font-variant-numeric: tabular-nums;
   font-feature-settings: 'tnum' 1;
+  border: 1px solid color-mix(in srgb, var(--app-shell-outline) 78%, #9eb3d3);
 }
 
 .layout-shell__clock-time {
@@ -70,17 +76,17 @@
 
 .layout-shell__clock-timezone {
   font: var(--mat-sys-label-medium);
-  color: var(--mat-sys-on-surface-variant);
+  color: color-mix(in srgb, var(--app-shell-text-secondary) 76%, #314660);
 }
 
 .layout-shell__world-clock-link {
   width: 2.125rem;
   height: 2.125rem;
-  color: var(--mat-sys-on-surface-variant);
+  color: var(--app-shell-text-secondary);
 }
 
 .layout-shell__world-clock-link:hover {
-  color: var(--mat-sys-primary);
+  color: var(--app-shell-link);
 }
 
 .layout-shell__profile-trigger {
@@ -89,6 +95,35 @@
   gap: 0.5rem;
   max-width: 100%;
   margin-left: 0.75rem;
+  --mdc-outlined-button-outline-color: var(--app-shell-outline);
+  --mdc-outlined-button-label-text-color: var(--app-shell-text-primary);
+  --mat-outlined-button-state-layer-color: var(--app-shell-link);
+  color: var(--app-shell-text-primary);
+}
+
+.layout-shell__profile-trigger mat-icon {
+  color: currentColor;
+}
+
+::ng-deep .layout-shell__profile-menu.mat-mdc-menu-panel {
+  background: var(--app-shell-card-bg);
+  border: 1px solid var(--app-shell-outline);
+  box-shadow: var(--app-shell-shadow);
+}
+
+::ng-deep .layout-shell__profile-menu .mat-mdc-menu-item {
+  color: var(--app-shell-text-primary);
+}
+
+::ng-deep .layout-shell__profile-menu .mat-mdc-menu-item .mat-icon,
+::ng-deep .layout-shell__profile-menu .mat-mdc-menu-item mat-icon {
+  color: var(--app-shell-link);
+}
+
+::ng-deep .layout-shell__profile-menu .mat-mdc-menu-item:hover,
+::ng-deep .layout-shell__profile-menu .mat-mdc-menu-item.cdk-program-focused,
+::ng-deep .layout-shell__profile-menu .mat-mdc-menu-item.cdk-focused {
+  background: color-mix(in srgb, var(--app-shell-card-bg-soft) 86%, white);
 }
 
 .layout-shell__profile-label {
@@ -99,23 +134,23 @@
 }
 
 .layout-shell__profile-trigger--mobile {
-  color: var(--mat-sys-on-surface);
+  color: var(--app-shell-text-primary);
 }
 
 .layout-shell__container {
   min-height: 0;
-  background: var(--mat-sys-surface-container-low);
+  background: var(--app-shell-page-bg);
 }
 
 .layout-shell__sidenav {
   width: 16rem;
-  border-right: 1px solid var(--mat-sys-outline-variant);
-  background: var(--mat-sys-surface-container);
+  border-right: 1px solid var(--app-shell-outline);
+  background: var(--app-shell-card-bg);
 }
 
 .layout-shell__menu-state {
   padding: 0.75rem 1rem;
-  color: var(--mat-sys-on-surface-variant);
+  color: var(--app-shell-text-secondary);
   font: var(--mat-sys-body-medium);
 }
 
@@ -152,20 +187,20 @@
   bottom: 0;
   z-index: 10;
   min-height: var(--layout-shell-footer-height);
-  border-top: 1px solid var(--mat-sys-outline-variant);
-  background: var(--mat-sys-surface);
+  border-top: 1px solid var(--app-shell-outline);
+  background: var(--app-shell-card-bg);
   padding: 0.45rem 0.6rem;
-  color: var(--mat-sys-on-surface-variant);
+  color: var(--app-shell-text-secondary);
 }
 
 .layout-shell__footer-version {
-  color: var(--mat-sys-on-surface-variant);
+  color: var(--app-shell-text-muted);
   opacity: 0.7;
 }
 
 .active-link {
   font-weight: 600;
-  color: var(--mat-sys-primary);
+  color: var(--app-shell-link);
 }
 
 .active-link mat-icon,

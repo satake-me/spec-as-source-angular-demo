@@ -13,6 +13,14 @@
   <style>
     .app-startup-loading {
       --startup-loading-fade-ms: 280;
+      --app-shell-page-bg: #f2f6fc;
+      --app-shell-surface-muted: color-mix(in srgb, #eaf2fd 76%, #ffffff);
+      --app-shell-surface-strong: color-mix(in srgb, #ffffff 78%, #e5effc 22%);
+      --app-shell-card-bg: color-mix(in srgb, #ffffff 82%, #e7f0fb 18%);
+      --app-shell-outline-strong: rgba(255, 255, 255, 0.86);
+      --app-shell-shadow-strong: 0 16px 38px rgba(40, 62, 95, 0.14);
+      --app-shell-text-primary: #253246;
+      --app-shell-text-secondary: #5f6f89;
       min-height: 100dvh;
       position: fixed;
       inset: 0;
@@ -21,8 +29,11 @@
       place-items: center;
       overflow: hidden;
       background:
-        radial-gradient(circle at 16% 12%, rgba(255, 255, 255, 0.92), rgba(244, 248, 255, 0.72) 52%, rgba(236, 240, 248, 0.84)),
-        #f4f7fc;
+        radial-gradient(circle at 14% 20%, rgba(255, 126, 98, 0.06), transparent 24%),
+        radial-gradient(circle at 84% 16%, rgba(92, 184, 255, 0.08), transparent 18%),
+        radial-gradient(circle at 74% 84%, rgba(114, 224, 168, 0.05), transparent 22%),
+        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.9), rgba(245, 248, 255, 0.62) 55%, rgba(236, 241, 248, 0.82)),
+        var(--app-shell-page-bg);
       color: #202124;
       font-family: Roboto, system-ui, sans-serif;
       transition: opacity calc(var(--startup-loading-fade-ms) * 1ms) ease;
@@ -34,16 +45,16 @@
 
     .app-startup-loading__card {
       width: min(29rem, calc(100vw - 2rem));
-      border: 1px solid rgba(255, 255, 255, 0.75);
+      border: 1px solid var(--app-shell-outline-strong);
       border-radius: 1.2rem;
-      background: color-mix(in srgb, white 75%, rgba(255, 255, 255, 0.2));
+      background: var(--app-shell-card-bg);
       padding: 1.35rem;
       box-sizing: border-box;
       display: grid;
       gap: 0.75rem;
       justify-items: center;
       text-align: center;
-      box-shadow: 0 16px 48px rgba(34, 45, 70, 0.2);
+      box-shadow: var(--app-shell-shadow-strong);
       backdrop-filter: blur(8px);
       position: relative;
       z-index: 1;
@@ -66,7 +77,11 @@
     .app-startup-loading__skeleton-topbar,
     .app-startup-loading__skeleton-card {
       border-radius: 0.9rem;
-      background: linear-gradient(150deg, rgba(205, 214, 227, 0.52), rgba(181, 189, 203, 0.44));
+      background: linear-gradient(
+        160deg,
+        color-mix(in srgb, var(--app-shell-surface-muted) 70%, transparent),
+        color-mix(in srgb, var(--app-shell-surface-muted) 60%, transparent)
+      );
     }
 
     .app-startup-loading__skeleton-sidebar {
@@ -93,12 +108,10 @@
           #ffe15d,
           #77df84,
           #4fc8ff,
-          #7182ff,
-          #d675f9,
           #ff4d4d
         );
       will-change: transform;
-      box-shadow: 0 0 0 rgba(113, 130, 255, 0.3);
+      box-shadow: 0 0 0 rgba(79, 200, 255, 0.24);
       animation:
         app-startup-spin 1300ms linear infinite,
         app-startup-bob 2200ms ease-in-out infinite,
@@ -126,7 +139,7 @@
       position: absolute;
       inset: 0.35rem;
       border-radius: inherit;
-      background: color-mix(in srgb, white 82%, rgba(244, 247, 253, 0.6));
+      background: var(--app-shell-surface-strong);
       z-index: 1;
     }
 
@@ -134,12 +147,12 @@
       margin: 0;
       font-size: 1.03rem;
       font-weight: 600;
-      color: #263246;
+      color: var(--app-shell-text-primary);
     }
 
     .app-startup-loading__copy {
       margin: 0;
-      color: #5f6f89;
+      color: var(--app-shell-text-secondary);
       font-size: 0.82rem;
       font-weight: 500;
       line-height: 1.35;
@@ -166,11 +179,11 @@
     @keyframes app-startup-glow {
       0%,
       100% {
-        box-shadow: 0 0 0 rgba(113, 130, 255, 0.2);
+        box-shadow: 0 0 0 rgba(79, 200, 255, 0.14);
       }
 
       50% {
-        box-shadow: 0 0 20px rgba(113, 130, 255, 0.4);
+        box-shadow: 0 0 20px rgba(79, 200, 255, 0.3);
       }
     }
 
@@ -191,7 +204,7 @@
 
       .app-startup-loading__spinner {
         animation: app-startup-spin 1300ms linear infinite;
-        background: linear-gradient(135deg, #ff7161, #f9ce58, #62d8a2, #67a7ff, #be73f7);
+        background: linear-gradient(135deg, #ff7e62, #ffcf61, #72e0a8, #5cb8ff);
       }
 
       .app-startup-loading__spinner::before {

@@ -84,6 +84,10 @@ describe('HomePageComponent', () => {
       })
     ),
   };
+  let routerMock: {
+    navigateByUrl: typeof navigateByUrl;
+    url: string;
+  };
 
   beforeEach(async () => {
     navigateByUrl.mockClear();
@@ -93,6 +97,10 @@ describe('HomePageComponent', () => {
     isProfileLoading.set(false);
     isAuthenticated.set(true);
     profile.set({ displayName: 'Thiago' });
+    routerMock = {
+      navigateByUrl,
+      url: '/welcome',
+    };
 
     await TestBed.configureTestingModule({
       imports: [HomePageComponent],
@@ -113,9 +121,7 @@ describe('HomePageComponent', () => {
         },
         {
           provide: Router,
-          useValue: {
-            navigateByUrl,
-          },
+          useValue: routerMock,
         },
       ],
     }).compileComponents();
@@ -196,6 +202,26 @@ describe('HomePageComponent', () => {
     fixture.detectChanges();
 
     expect(fixture.nativeElement.textContent).toContain('We could not open this feature right now. Please try again.');
+  });
+
+  it('does not show action error when card points to the current route', async () => {
+    routerMock.url = '/home';
+
+    const fixture = TestBed.createComponent(HomePageComponent);
+    fixture.detectChanges();
+
+    const cardButton = fixture.nativeElement.querySelector(
+      '[data-testid="home-feature-card"]'
+    ) as HTMLButtonElement;
+    cardButton.click();
+
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(navigateByUrl).not.toHaveBeenCalled();
+    expect(fixture.nativeElement.textContent).not.toContain(
+      'We could not open this feature right now. Please try again.'
+    );
   });
 
   it('shows empty state when no items are visible', () => {

@@ -21,6 +21,7 @@ import { APP_LAYOUT_SECTIONS, filterMenuItemsForAuth, ShellLayoutState } from '.
 import { buildHeaderProfileState, HeaderProfileState } from './shell-profile.models';
 
 type MenuLoadStatus = 'loading' | 'ready' | 'error';
+const APP_STARTUP_LOADING_HIDDEN_EVENT = 'app-startup-loading-hidden';
 
 @Component({
   selector: 'app-shell',
@@ -50,6 +51,9 @@ export class AppShellComponent {
   private readonly menuConfigLoader = inject(ShellMenuConfigLoader);
   private readonly destroyRef = inject(DestroyRef);
   private startupOverlaySettled = false;
+  private startupMenuSettled = false;
+  private startupLoaderHidden =
+    typeof document !== 'undefined' && document.documentElement.dataset['startupLoadingHidden'] === 'true';
 
   readonly layoutSections = APP_LAYOUT_SECTIONS;
   readonly isMobile = signal(false);
@@ -86,6 +90,7 @@ export class AppShellComponent {
     }
 
     this.loadNavigationMenu();
+    this.registerStartupLoaderHiddenListener();
 
     this.breakpointObserver
       .observe(MOBILE_BREAKPOINT_QUERY)
@@ -169,11 +174,8 @@ export class AppShellComponent {
         this.rawMenuItems.set(result.items);
         this.menuStatus.set(result.status);
         this.menuErrorMessage.set(result.errorMessage);
-
-        if (!this.startupOverlaySettled) {
-          this.startupOverlaySettled = true;
-          this.appLoadingService.complete('app-startup');
-        }
+        this.startupMenuSettled = true;
+        this.tryCompleteStartupOverlay();
 
         const visibleParentIds = result.items
           .filter((item) => item.children !== null && item.children.length > 0)
@@ -181,5 +183,30 @@ export class AppShellComponent {
 
         this.expandedParentIds.set(visibleParentIds);
       });
+  }
+
+  private registerStartupLoaderHiddenListener(): void {
+    if (typeof window === 'undefined' || this.startupLoaderHidden) {
+      return;
+    }
+
+    const onStartupLoaderHidden = (): void => {
+      this.startupLoaderHidden = true;
+      this.tryCompleteStartupOverlay();
+    };
+
+    window.addEventListener(APP_STARTUP_LOADING_HIDDEN_EVENT, onStartupLoaderHidden);
+    this.destroyRef.onDestroy(() => {
+      window.removeEventListener(APP_STARTUP_LOADING_HIDDEN_EVENT, onStartupLoaderHidden);
+    });
+  }
+
+  private tryCompleteStartupOverlay(): void {
+    if (this.startupOverlaySettled || !this.startupMenuSettled || !this.startupLoaderHidden) {
+      return;
+    }
+
+    this.startupOverlaySettled = true;
+    this.appLoadingService.complete('app-startup');
   }
 }

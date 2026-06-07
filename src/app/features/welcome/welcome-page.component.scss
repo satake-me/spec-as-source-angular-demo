@@ -5,16 +5,18 @@
   grid-template-columns: minmax(0, 42rem);
   justify-content: center;
   padding: clamp(1.5rem, 5vw, 4rem);
-  background: var(--mat-sys-surface);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3)),
+    var(--app-shell-page-bg);
 }
 
 .hero-card,
 .details-card {
   border-radius: 1.5rem;
   padding: clamp(1.25rem, 3vw, 2rem);
-  background: var(--mat-sys-surface-container-low);
-  color: var(--mat-sys-on-surface);
-  border-color: var(--mat-sys-outline-variant);
+  background: var(--app-shell-card-bg);
+  color: var(--app-shell-text-primary);
+  border-color: var(--app-shell-outline);
 }
 
 .eyebrow {
@@ -23,18 +25,18 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--mat-sys-primary);
+  color: var(--app-shell-link);
 }
 
 h1,
 h2 {
   margin: 0;
-  color: var(--mat-sys-on-surface);
+  color: var(--app-shell-text-primary);
 }
 
 .supporting-copy {
   margin: 1rem 0 1.5rem;
-  color: var(--mat-sys-on-surface-variant);
+  color: var(--app-shell-text-secondary);
   line-height: 1.6;
 }
 
@@ -44,15 +46,15 @@ h2 {
   margin-bottom: 1rem;
   padding: 1rem;
   border-radius: 1rem;
-  background: var(--mat-sys-surface-container-high);
-  color: var(--mat-sys-on-surface);
-  border: 1px solid var(--mat-sys-outline-variant);
+  background: color-mix(in srgb, var(--app-shell-card-bg-soft) 90%, white);
+  color: var(--app-shell-text-primary);
+  border: 1px solid var(--app-shell-outline);
 }
 
 ol {
   margin: 1rem 0 0;
   padding-left: 1.2rem;
-  color: var(--mat-sys-on-surface-variant);
+  color: var(--app-shell-text-secondary);
   line-height: 1.7;
 }
 

@@ -3,10 +3,10 @@
 }
 
 .loading-overlay {
-  --overlay-surface: color-mix(in srgb, #f7f9fd 86%, white);
-  --overlay-neutral-100: rgba(205, 212, 224, 0.5);
-  --overlay-neutral-200: rgba(182, 190, 204, 0.46);
-  --overlay-shadow: 0 18px 46px rgba(35, 42, 58, 0.2);
+  --overlay-surface: var(--app-shell-page-bg);
+  --overlay-neutral-100: color-mix(in srgb, var(--app-shell-surface-muted) 70%, transparent);
+  --overlay-neutral-200: color-mix(in srgb, var(--app-shell-surface-muted) 60%, transparent);
+  --overlay-shadow: var(--app-shell-shadow-strong);
 
   position: fixed;
   inset: 0;
@@ -76,9 +76,9 @@
   justify-items: center;
   text-align: center;
   gap: 0.75rem;
-  background: color-mix(in srgb, white 75%, rgba(255, 255, 255, 0.2));
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  box-shadow: 0 16px 48px rgba(34, 45, 70, 0.2);
+  background: var(--app-shell-card-bg);
+  border: 1px solid var(--app-shell-outline-strong);
+  box-shadow: var(--overlay-shadow);
   backdrop-filter: blur(8px);
 }
 
@@ -95,12 +95,10 @@
       #ffe15d,
       #77df84,
       #4fc8ff,
-      #7182ff,
-      #d675f9,
       #ff4d4d
     );
   will-change: transform;
-  box-shadow: 0 0 0 rgba(113, 130, 255, 0.3);
+  box-shadow: 0 0 0 rgba(79, 200, 255, 0.24);
   animation:
     loading-overlay-rainbow-spin 1300ms linear infinite,
     loading-overlay-rainbow-bob 2200ms ease-in-out infinite,
@@ -128,7 +126,7 @@
   position: absolute;
   inset: 0.35rem;
   border-radius: inherit;
-  background: color-mix(in srgb, white 82%, rgba(244, 247, 253, 0.6));
+  background: var(--app-shell-surface-strong);
   z-index: 1;
 }
 
@@ -138,7 +136,7 @@
   font-size: 1.03rem;
   font-weight: 600;
   line-height: 1.25;
-  color: #263246;
+  color: var(--app-shell-text-primary);
 }
 
 .loading-overlay__copy {
@@ -148,12 +146,12 @@
   font-size: 0.82rem;
   font-weight: 500;
   line-height: 1.35;
-  color: #5f6f89;
+  color: var(--app-shell-text-secondary);
 }
 
 .loading-overlay--reduced-motion .loading-overlay__rainbow-loader {
   animation: loading-overlay-rainbow-spin 1300ms linear infinite;
-  background: linear-gradient(135deg, #ff6a59, #f8d14e, #55d6a2, #56a9ff, #b270f4);
+  background: var(--app-shell-accent);
 }
 
 .loading-overlay--reduced-motion .loading-overlay__rainbow-loader::before {
@@ -186,11 +184,11 @@
 @keyframes loading-overlay-rainbow-glow {
   0%,
   100% {
-    box-shadow: 0 0 0 rgba(113, 130, 255, 0.2);
+    box-shadow: 0 0 0 rgba(79, 200, 255, 0.14);
   }
 
   50% {
-    box-shadow: 0 0 20px rgba(113, 130, 255, 0.4);
+    box-shadow: 0 0 20px rgba(79, 200, 255, 0.3);
   }
 }
 

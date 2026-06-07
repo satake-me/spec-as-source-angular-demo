@@ -1,9 +1,35 @@
 @use '@angular/material' as mat;
 
+@layer base {
+	:root {
+		--app-shell-page-bg: #f2f6fc;
+		--app-shell-page-bg-accent:
+			radial-gradient(circle at 12% 18%, rgba(255, 126, 98, 0.08), transparent 24%),
+			radial-gradient(circle at 30% 8%, rgba(255, 207, 97, 0.08), transparent 18%),
+			radial-gradient(circle at 82% 14%, rgba(92, 184, 255, 0.1), transparent 20%),
+			radial-gradient(circle at 78% 86%, rgba(114, 224, 168, 0.06), transparent 22%),
+			linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.36));
+		--app-shell-surface: color-mix(in srgb, #ffffff 86%, #edf4fd 14%);
+		--app-shell-surface-strong: color-mix(in srgb, #ffffff 78%, #e5effc 22%);
+		--app-shell-surface-muted: color-mix(in srgb, #eaf2fd 76%, #ffffff);
+		--app-shell-card-bg: color-mix(in srgb, #ffffff 82%, #e7f0fb 18%);
+		--app-shell-card-bg-soft: color-mix(in srgb, #ffffff 74%, #deebfa 26%);
+		--app-shell-outline: rgba(142, 165, 198, 0.42);
+		--app-shell-outline-strong: rgba(255, 255, 255, 0.86);
+		--app-shell-shadow: 0 14px 34px rgba(40, 62, 95, 0.12);
+		--app-shell-shadow-strong: 0 16px 38px rgba(40, 62, 95, 0.14);
+		--app-shell-accent: linear-gradient(135deg, #ff7e62, #ffcf61, #72e0a8, #5cb8ff);
+		--app-shell-text-primary: #253246;
+		--app-shell-text-secondary: #5f6f89;
+		--app-shell-text-muted: #7c8aa0;
+		--app-shell-link: #2e72d0;
+	}
+}
+
 html {
-	color-scheme: light dark;
+	color-scheme: light;
 	@include mat.theme((
-		color: mat.$violet-palette,
+		color: mat.$azure-palette,
 		typography: Roboto,
 		density: 0,
 	));
@@ -17,9 +43,24 @@ body {
 
 body {
 	margin: 0;
-	background: var(--mat-sys-surface);
-	color: var(--mat-sys-on-surface);
+	background:
+		var(--app-shell-page-bg-accent),
+		var(--app-shell-page-bg);
+	color: var(--app-shell-text-primary);
 	font-family: Roboto, 'Segoe UI', sans-serif;
+}
+
+body::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	background:
+		radial-gradient(circle at 14% 20%, rgba(255, 126, 98, 0.06), transparent 24%),
+		radial-gradient(circle at 84% 16%, rgba(92, 184, 255, 0.08), transparent 18%),
+		radial-gradient(circle at 74% 84%, rgba(114, 224, 168, 0.05), transparent 22%);
+	opacity: 0.9;
+	z-index: -1;
 }
 
 button,

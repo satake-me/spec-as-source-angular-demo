@@ -63,9 +63,9 @@
               <span class="feature-card__title">
                 <span class="feature-card__icon" aria-hidden="true">
                   @if (card.icon; as icon) {
-                    <mat-icon>{{ icon }}</mat-icon>
+                    <mat-icon [fontIcon]="icon"></mat-icon>
                   } @else {
-                    <mat-icon>arrow_outward</mat-icon>
+                    <mat-icon fontIcon="arrow_outward"></mat-icon>
                   }
                 </span>
                 {{ card.label }}
@@ -93,14 +93,16 @@
             <mat-expansion-panel [expanded]="group.initiallyExpanded" data-testid="home-feature-group-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  <span class="group-icon" aria-hidden="true">
-                    @if (group.icon; as icon) {
-                      <mat-icon>{{ icon }}</mat-icon>
-                    } @else {
-                      <mat-icon>folder_open</mat-icon>
-                    }
+                  <span class="group-title">
+                    <span class="group-icon" aria-hidden="true">
+                      @if (group.icon; as icon) {
+                        <mat-icon [fontIcon]="icon"></mat-icon>
+                      } @else {
+                        <mat-icon fontIcon="folder_open"></mat-icon>
+                      }
+                    </span>
+                    <span class="group-title__label">{{ group.label }}</span>
                   </span>
-                  {{ group.label }}
                 </mat-panel-title>
                 <mat-panel-description>
                   {{ group.children.length }} links
@@ -122,9 +124,9 @@
                     <span class="feature-card__title">
                       <span class="feature-card__icon" aria-hidden="true">
                         @if (card.icon; as icon) {
-                          <mat-icon>{{ icon }}</mat-icon>
+                          <mat-icon [fontIcon]="icon"></mat-icon>
                         } @else {
-                          <mat-icon>subdirectory_arrow_right</mat-icon>
+                          <mat-icon fontIcon="subdirectory_arrow_right"></mat-icon>
                         }
                       </span>
                       {{ card.label }}

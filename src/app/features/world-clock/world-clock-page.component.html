@@ -1,6 +1,6 @@
 <!-- World Clock Page Component Template (T025-T035) -->
 
-<div class="world-clock-page">
+<div class="world-clock-page" [class.world-clock-page--loading]="pageState().isLoading">
   <!-- Page Header -->
   <mat-card class="world-header-card" appearance="outlined" data-testid="world-clock-header-card">
     <header class="page-header">
@@ -44,14 +44,6 @@
       </div>
     </header>
   </mat-card>
-
-  <!-- Loading State -->
-  @if (pageState().isLoading) {
-    <div class="loading-container">
-      <mat-spinner diameter="40"></mat-spinner>
-      <p>Loading world times...</p>
-    </div>
-  }
 
   <!-- Error State -->
   @if (pageState().error) {

@@ -77,7 +77,7 @@
     </mat-toolbar>
   </header>
 
-  <mat-menu #profileMenu="matMenu">
+  <mat-menu #profileMenu="matMenu" class="layout-shell__profile-menu">
     @if (headerProfileState().isAuthenticated) {
       <button mat-menu-item type="button" (click)="openProfileAccount()">
         <mat-icon>account_circle</mat-icon>
