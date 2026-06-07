@@ -1,4 +1,4 @@
 {
-  "mf1": "http://localhost:4201/remoteEntry.json",
-  "mf2": "http://localhost:4202/remoteEntry.json"
+  "ocpi-mfe": "http://localhost:4203/remoteEntry.json",
+  "payments-mfe": "http://localhost:4204/remoteEntry.json"
 }

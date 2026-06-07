@@ -2,8 +2,23 @@
   <mat-card class="home-header-card" appearance="outlined" data-testid="home-header-card">
     <h1>{{ greeting() }}</h1>
     <p class="supporting-copy" data-testid="home-supporting-copy">
-      Explore available features from cards generated from the same source as the side menu.
+      Explore the portal from a landing page that mirrors the same feature-first experience used in the remote microfrontends.
     </p>
+
+    <div class="home-header-insights">
+      <div class="home-stat">
+        <span class="home-stat__value">{{ homeStats().linkedCount }}</span>
+        <span class="home-stat__label">available links</span>
+      </div>
+      <div class="home-stat">
+        <span class="home-stat__value">{{ homeStats().directCount }}</span>
+        <span class="home-stat__label">direct features</span>
+      </div>
+      <div class="home-stat">
+        <span class="home-stat__value">{{ homeStats().groupedCount }}</span>
+        <span class="home-stat__label">feature groups</span>
+      </div>
+    </div>
 
     @if (viewState().actionErrorMessage; as actionErrorMessage) {
       <section class="warning-state" role="status" aria-live="polite" data-testid="home-action-error">
@@ -30,21 +45,32 @@
     >
       <section class="card-region" aria-label="Direct features" data-testid="home-direct-features-region">
         <h2>Direct features</h2>
+        <p class="selected-copy" role="status" aria-live="polite">
+          {{ selectedMessage() }}
+        </p>
         <div class="feature-grid" data-testid="home-feature-grid">
           @for (card of viewState().directCards; track card.id) {
             <button
               class="feature-card"
+              [class.feature-card--active]="isFeatureHighlighted(card.id)"
               type="button"
               (click)="navigateTo(card.route)"
+              (mouseenter)="highlightFeature(card.id)"
+              (focus)="highlightFeature(card.id)"
               [attr.aria-label]="'Open ' + card.label"
               data-testid="home-feature-card"
             >
               <span class="feature-card__title">
-                @if (card.icon; as icon) {
-                  <mat-icon>{{ icon }}</mat-icon>
-                }
+                <span class="feature-card__icon" aria-hidden="true">
+                  @if (card.icon; as icon) {
+                    <mat-icon>{{ icon }}</mat-icon>
+                  } @else {
+                    <mat-icon>arrow_outward</mat-icon>
+                  }
+                </span>
                 {{ card.label }}
               </span>
+              <span class="feature-card__summary">{{ getFeatureSummary(card.route, null) }}</span>
               <span class="feature-card__route">{{ card.route }}</span>
             </button>
           }
@@ -53,42 +79,27 @@
 
       <section class="card-region" aria-label="Grouped features" data-testid="home-grouped-features-region">
         <div class="grouped-header-row">
-          <h2>Grouped features</h2>
-          <div class="grouped-header-actions">
-            <button
-              mat-stroked-button
-              type="button"
-              (click)="homeFeatureAccordion.openAll()"
-              aria-label="Expand all grouped features"
-              data-testid="home-groups-expand-all"
-            >
-              Expand all
-            </button>
-            <button
-              mat-stroked-button
-              type="button"
-              (click)="homeFeatureAccordion.closeAll()"
-              aria-label="Collapse all grouped features"
-              data-testid="home-groups-collapse-all"
-            >
-              Collapse all
-            </button>
+          <div class="grouped-header-copy">
+            <h2>Grouped features</h2>
+            <p class="grouped-supporting-copy">
+              Related workflows stay organized by area so the home page remains compact and easy to scan.
+            </p>
           </div>
+          <span class="grouped-chip">{{ viewState().groups.length }} groups</span>
         </div>
 
-        <mat-accordion
-          #homeFeatureAccordion="matAccordion"
-          class="feature-groups"
-          data-testid="home-feature-groups"
-          [multi]="true"
-        >
+        <mat-accordion class="feature-groups" data-testid="home-feature-groups" [multi]="true">
           @for (group of viewState().groups; track group.id) {
             <mat-expansion-panel [expanded]="group.initiallyExpanded" data-testid="home-feature-group-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  @if (group.icon; as icon) {
-                    <mat-icon>{{ icon }}</mat-icon>
-                  }
+                  <span class="group-icon" aria-hidden="true">
+                    @if (group.icon; as icon) {
+                      <mat-icon>{{ icon }}</mat-icon>
+                    } @else {
+                      <mat-icon>folder_open</mat-icon>
+                    }
+                  </span>
                   {{ group.label }}
                 </mat-panel-title>
                 <mat-panel-description>
@@ -100,17 +111,25 @@
                 @for (card of group.children; track card.id) {
                   <button
                     class="feature-card feature-card--child"
+                    [class.feature-card--active]="isFeatureHighlighted(card.id)"
                     type="button"
                     (click)="navigateTo(card.route)"
+                    (mouseenter)="highlightFeature(card.id)"
+                    (focus)="highlightFeature(card.id)"
                     [attr.aria-label]="'Open ' + card.label"
                     data-testid="home-group-child-card"
                   >
                     <span class="feature-card__title">
-                      @if (card.icon; as icon) {
-                        <mat-icon>{{ icon }}</mat-icon>
-                      }
+                      <span class="feature-card__icon" aria-hidden="true">
+                        @if (card.icon; as icon) {
+                          <mat-icon>{{ icon }}</mat-icon>
+                        } @else {
+                          <mat-icon>subdirectory_arrow_right</mat-icon>
+                        }
+                      </span>
                       {{ card.label }}
                     </span>
+                    <span class="feature-card__summary">{{ getFeatureSummary(card.route, group.label) }}</span>
                     <span class="feature-card__route">{{ card.route }}</span>
                   </button>
                 }

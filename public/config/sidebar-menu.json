@@ -32,152 +32,24 @@
       "children": null
     },
     {
-      "id": "mf1",
-      "label": "Catalogo Federado",
-      "route": "/mf1",
-      "icon": "storefront",
-      "requiresAuth": false,
-      "visibleWhenAuthenticated": true,
-      "order": 13,
-      "children": null
-    },
-    {
-      "id": "mf2",
-      "label": "Dashboard Operacional",
-      "route": "/mf2",
-      "icon": "dashboard",
-      "requiresAuth": false,
-      "visibleWhenAuthenticated": true,
-      "order": 14,
-      "children": null
-    },
-    {
-      "id": "ocpi_modules",
+      "id": "ocpi_mfe",
       "label": "OCPI Modules",
-      "route": null,
+      "route": "/ocpi",
+      "icon": "hub",
       "requiresAuth": true,
       "visibleWhenAuthenticated": true,
-      "order": 20,
-      "children": [
-        {
-          "id": "versions",
-          "label": "Versions",
-          "route": "/getnet",
-          "icon": "merge",
-          "requiresAuth": true,
-          "visibleWhenAuthenticated": true,
-          "order": 10
-        },
-        {
-          "id": "locations",
-          "label": "Locations",
-          "route": "/getnet",
-          "icon": "location_on",
-          "requiresAuth": true,
-          "visibleWhenAuthenticated": true,
-          "order": 20
-        },
-        {
-          "id": "sessions",
-          "label": "Sessions",
-          "route": "/getnet",
-          "icon": "electric_car",
-          "requiresAuth": true,
-          "visibleWhenAuthenticated": true,
-          "order": 30
-        },
-        {
-          "id": "cdrs",
-          "label": "CDRs",
-          "route": "/getnet",
-          "icon": "payments",
-          "requiresAuth": true,
-          "visibleWhenAuthenticated": true,
-          "order": 40
-        },
-        {
-          "id": "tokens",
-          "label": "Tokens",
-          "route": "/getnet",
-          "icon": "token",
-          "requiresAuth": true,
-          "visibleWhenAuthenticated": true,
-          "order": 50
-        },
-        {
-          "id": "commands",
-          "label": "Commands",
-          "route": "/getnet",
-          "icon": "terminal_2",
-          "requiresAuth": true,
-          "visibleWhenAuthenticated": true,
-          "order": 60
-        },
-        {
-          "id": "charge_profiles",
-          "label": "Charge Profiles",
-          "route": "/getnet",
-          "icon": "electric_meter",
-          "requiresAuth": true,
-          "visibleWhenAuthenticated": true,
-          "order": 70
-        },
-        {
-          "id": "tariffs",
-          "label": "Tariffs",
-          "route": "/getnet",
-          "icon": "price_change",
-          "requiresAuth": true,
-          "visibleWhenAuthenticated": true,
-          "order": 80
-        },
-        {
-          "id": "hub_client_info",
-          "label": "Hub Client Info",
-          "route": "/getnet",
-          "icon": "hub",
-          "requiresAuth": true,
-          "visibleWhenAuthenticated": true,
-          "order": 90
-        }
-      ]
+      "order": 15,
+      "children": null
     },
     {
       "id": "gatway_payments",
       "label": "Gateway Payments",
-      "route": null,
+      "route": "/payments",
+      "icon": "payments",
       "requiresAuth": true,
       "visibleWhenAuthenticated": true,
       "order": 30,
-      "children": [
-        {
-          "id": "getnet",
-          "label": "GetNet",
-          "route": "/getnet",
-          "icon": "attach_money",
-          "requiresAuth": true,
-          "visibleWhenAuthenticated": true,
-          "order": 10
-        },
-        {
-          "id": "santander",
-          "label": "Santander",
-          "route": "/santender",
-          "icon": "credit_card",
-          "requiresAuth": true,
-          "visibleWhenAuthenticated": true,
-          "order": 20
-        },
-        {
-          "id": "assas",
-          "label": "Assas",
-          "route": "/assas",
-          "icon": "account_balance",
-          "requiresAuth": true,
-          "visibleWhenAuthenticated": true,
-          "order": 30
-        }
-      ]
+      "children": null
     },
     {
       "id": "maps_plataform",

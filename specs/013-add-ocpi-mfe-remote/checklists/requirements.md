@@ -1,4 +1,4 @@
-# Specification Quality Checklist: Independent Remotes Architecture
+# Specification Quality Checklist: Add OCPI MFE Remote
 
 **Purpose**: Validate specification completeness and quality before proceeding to planning
 **Created**: 2026-06-06
@@ -31,4 +31,5 @@
 
 ## Notes
 
-- Items marked incomplete require spec updates before `/speckit.clarify` or `/speckit.plan`
+- Checklist validated in one iteration.
+- No unresolved clarifications; specification is ready for `/speckit.plan`.

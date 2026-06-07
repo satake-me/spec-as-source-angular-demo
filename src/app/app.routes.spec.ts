@@ -1,5 +1,4 @@
 import '@angular/compiler';
-import { Type } from '@angular/core';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('@angular-architects/native-federation', () => ({
@@ -17,6 +16,14 @@ import { WelcomePageComponent } from './features/welcome/welcome-page.component'
 import { AppShellComponent } from './layout/app-shell.component';
 
 const loadRemoteModuleMock = vi.mocked(loadRemoteModule);
+
+function getShellChildren() {
+  return routes[0]?.children ?? [];
+}
+
+function findShellRoute(path: string) {
+  return getShellChildren().find((route) => route.path === path);
+}
 
 describe('app routes', () => {
   beforeEach(() => {
@@ -48,62 +55,90 @@ describe('app routes', () => {
   });
 
   it('protects the shell account child route and maps it to the account page component', () => {
-    expect(routes[0]?.children?.[2]).toMatchObject({
+    const accountRoute = findShellRoute('account');
+
+    expect(accountRoute).toMatchObject({
       path: 'account',
       component: AccountPageComponent,
     });
-    expect(routes[0]?.children?.[2]?.canActivate?.length).toBe(1);
+    expect(accountRoute?.canActivate?.length).toBe(1);
   });
 
-  it('lazily loads the mf1 remote from the shell route tree', () => {
-    expect(routes[0]?.children?.[4]).toMatchObject({
-      path: 'mf1',
-      data: { title: 'Catalogo Federado', icon: 'storefront' },
+  it('adds an OCPI placeholder route in the shell tree', () => {
+    const ocpiRoute = findShellRoute('ocpi');
+
+    expect(ocpiRoute).toMatchObject({
+      path: 'ocpi',
+      data: { title: 'OCPI Modules', icon: 'hub' },
     });
-    expect(routes[0]?.children?.[4]?.loadComponent).toEqual(expect.any(Function));
+    expect(ocpiRoute?.loadChildren).toEqual(expect.any(Function));
   });
 
-  it('lazily loads the mf2 remote from the shell route tree', () => {
-    expect(routes[0]?.children?.[5]).toMatchObject({
-      path: 'mf2',
-      data: { title: 'Dashboard Operacional', icon: 'dashboard' },
+  it('adds a Gateway Payments placeholder route in the shell tree', () => {
+    const paymentsRoute = findShellRoute('payments');
+
+    expect(paymentsRoute).toMatchObject({
+      path: 'payments',
+      data: { title: 'Gateway Payments', icon: 'payments' },
     });
-    expect(routes[0]?.children?.[5]?.loadComponent).toEqual(expect.any(Function));
+    expect(paymentsRoute?.loadChildren).toEqual(expect.any(Function));
   });
 
-  it('resolves mf1 using the manifest remote name and stable exposed module key', async () => {
-    class Mf1Component {}
+  it('protects the OCPI route using the authenticated route guard', () => {
+    const ocpiRoute = findShellRoute('ocpi');
 
-    loadRemoteModuleMock.mockResolvedValue({ Mf1Component });
-    const component = await routes[0]?.children?.[4]?.loadComponent?.();
-
-    expect(component).toBe(Mf1Component as unknown as Type<unknown>);
-    expect(loadRemoteModuleMock).toHaveBeenCalledWith('mf1', './Component');
+    expect(ocpiRoute?.canActivate?.length).toBe(1);
+    expect(ocpiRoute?.canActivate?.[0]).toBe(canActivateAuthenticatedRoute);
   });
 
-  it('resolves mf2 using the manifest remote name and stable exposed module key', async () => {
-    class Mf2Component {}
+  it('protects the Gateway Payments route using the authenticated route guard', () => {
+    const paymentsRoute = findShellRoute('payments');
 
-    loadRemoteModuleMock.mockResolvedValue({ Mf2Component });
-    const component = await routes[0]?.children?.[5]?.loadComponent?.();
-
-    expect(component).toBe(Mf2Component as unknown as Type<unknown>);
-    expect(loadRemoteModuleMock).toHaveBeenCalledWith('mf2', './Component');
+    expect(paymentsRoute?.canActivate?.length).toBe(1);
+    expect(paymentsRoute?.canActivate?.[0]).toBe(canActivateAuthenticatedRoute);
   });
 
-  it('shows a friendly fallback page when a remote is unavailable', async () => {
+  it('resolves ocpi-mfe using the stable exposed route contract', async () => {
+    const remoteRoutes = [{ path: '', title: 'OCPI Modules' }];
+
+    loadRemoteModuleMock.mockResolvedValue({ routes: remoteRoutes });
+    const routeChildren = await findShellRoute('ocpi')?.loadChildren?.();
+
+    expect(routeChildren).toBe(remoteRoutes);
+    expect(loadRemoteModuleMock).toHaveBeenCalledWith('ocpi-mfe', './Routes');
+  });
+
+  it('resolves payments-mfe using the stable exposed route contract', async () => {
+    const remoteRoutes = [{ path: '', title: 'Gateway Payments' }];
+
+    loadRemoteModuleMock.mockResolvedValue({ routes: remoteRoutes });
+    const routeChildren = await findShellRoute('payments')?.loadChildren?.();
+
+    expect(routeChildren).toBe(remoteRoutes);
+    expect(loadRemoteModuleMock).toHaveBeenCalledWith('payments-mfe', './Routes');
+  });
+
+  it('shows a friendly fallback page when the OCPI route tree is unavailable', async () => {
     loadRemoteModuleMock.mockRejectedValue(new Error('Remote is offline'));
 
-    const component = await routes[0]?.children?.[4]?.loadComponent?.();
+    const routeChildren = await findShellRoute('ocpi')?.loadChildren?.();
 
-    expect(component).toBe(RemoteUnavailablePageComponent as unknown as Type<unknown>);
+    expect(routeChildren).toEqual([{ path: '', component: RemoteUnavailablePageComponent }]);
+  });
+
+  it('shows a friendly fallback page when the payments route tree is unavailable', async () => {
+    loadRemoteModuleMock.mockRejectedValue(new Error('Remote is offline'));
+
+    const routeChildren = await findShellRoute('payments')?.loadChildren?.();
+
+    expect(routeChildren).toEqual([{ path: '', component: RemoteUnavailablePageComponent }]);
   });
 
   it('keeps route definitions free from hardcoded remote entry URLs', () => {
     const routeTree = JSON.stringify(routes);
 
     expect(routeTree).not.toContain('remoteEntry.json');
-    expect(routeTree).not.toContain('http://localhost:4201');
-    expect(routeTree).not.toContain('http://localhost:4202');
+    expect(routeTree).not.toContain('http://localhost:4203');
+    expect(routeTree).not.toContain('http://localhost:4204');
   });
 });
