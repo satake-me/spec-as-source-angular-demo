@@ -1,0 +1,28 @@
+@if (state().phase !== 'hidden') {
+  <section
+    class="loading-overlay"
+    [class.loading-overlay--exiting]="state().phase === 'exiting'"
+    [class.loading-overlay--reduced-motion]="state().reducedMotion"
+    [style.--loading-overlay-fade-ms]="state().fadeOutMs"
+    role="status"
+    aria-live="polite"
+    aria-label="Application loading"
+    data-testid="loading-overlay"
+  >
+    <div class="loading-overlay__skeleton" aria-hidden="true" data-testid="loading-overlay-skeleton">
+      <div class="loading-overlay__skeleton-sidebar" data-testid="loading-skeleton-sidebar"></div>
+      <div class="loading-overlay__skeleton-topbar" data-testid="loading-skeleton-topbar"></div>
+      <div class="loading-overlay__skeleton-content" data-testid="loading-skeleton-content">
+        @for (block of buildContentBlocks(state().skeletonLayout.contentBlockCount); track block) {
+          <div class="loading-overlay__skeleton-card"></div>
+        }
+      </div>
+    </div>
+
+    <div class="loading-overlay__focus-wrap">
+      <div class="loading-overlay__rainbow-loader" aria-hidden="true" data-testid="loading-rainbow-loader"></div>
+      <p class="loading-overlay__label">Loading workspace</p>
+      <p class="loading-overlay__copy">Loading navigation and workspace modules.</p>
+    </div>
+  </section>
+}
