@@ -119,8 +119,7 @@
   font-size: 1rem;
 }
 
-.feature-card__icon,
-.group-icon {
+.feature-card__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -136,7 +135,6 @@
 .group-title {
   display: inline-flex;
   align-items: center;
-  gap: 0.78rem;
   min-width: 0;
 }
 
@@ -146,22 +144,7 @@
   line-height: 1.2;
 }
 
-.group-title .group-icon {
-  width: 2.1rem;
-  height: 2.1rem;
-  flex: 0 0 2.1rem;
-  border-radius: 0.7rem;
-  background: color-mix(in srgb, #dbe8fb 74%, white);
-}
-
-.group-title .group-icon mat-icon {
-  font-size: 1.12rem;
-  width: 1.12rem;
-  height: 1.12rem;
-}
-
-.feature-card__icon mat-icon,
-.group-icon mat-icon {
+.feature-card__icon mat-icon {
   font-size: 1.2rem;
   width: 1.2rem;
   height: 1.2rem;
