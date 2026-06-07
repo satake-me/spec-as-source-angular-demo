@@ -3,7 +3,6 @@
  */
 import { TestBed } from '@angular/core/testing';
 import { WorldClockTimeService } from './world-clock-time.service';
-import { take } from 'rxjs/operators';
 import { WorldClockEntry } from '../models/world-clock.models';
 import { firstValueFrom } from 'rxjs';
 
@@ -17,23 +16,30 @@ describe('WorldClockTimeService', () => {
     service = TestBed.inject(WorldClockTimeService);
   });
 
-  it('should return exactly 10 clock entries with UTC-0 first (T010)', async () => {
+  it('should return exactly 9 clock entries with UTC first (T010)', async () => {
     const entries = await firstValueFrom(service.getCurrentTimes());
-    expect(entries.length).toBe(10);
+    expect(entries.length).toBe(9);
     expect(entries[0].id).toBe('utc');
 
     const ids = entries.map((entry) => entry.id);
-    expect(ids).toContain('utc');
-    expect(ids).toContain('usa');
-    expect(ids).toContain('india');
     expect(ids).toContain('japan');
+    expect(ids).toContain('china');
+    expect(ids).toContain('usa');
+    expect(ids).toContain('brazil');
+    expect(ids).toContain('india');
     expect(ids).toContain('germany');
-    expect(ids).toContain('australia');
-    expect(ids).toContain('uae');
+    expect(ids).toContain('canada');
+    expect(ids).toContain('mexico');
+    expect(ids).toContain('utc');
 
-    const nonUtcEntries = entries.slice(1);
-    const nonNegativeOffsets = nonUtcEntries.filter((entry) => entry.utcOffset >= 0).map((entry) => entry.utcOffset);
-    const negativeOffsets = nonUtcEntries.filter((entry) => entry.utcOffset < 0).map((entry) => entry.utcOffset);
+    const nonNegativeOffsets = entries.filter((entry) => entry.utcOffset > 0).map((entry) => entry.utcOffset);
+    const zeroOffsets = entries.filter((entry) => entry.utcOffset === 0);
+    const negativeOffsets = entries.filter((entry) => entry.utcOffset < 0).map((entry) => entry.utcOffset);
+
+    expect(nonNegativeOffsets.length).toBe(4);
+    expect(zeroOffsets.length).toBe(1);
+    expect(negativeOffsets.length).toBe(4);
+    expect(zeroOffsets[0].id).toBe('utc');
 
     expect(nonNegativeOffsets).toEqual([...nonNegativeOffsets].sort((a, b) => b - a));
     expect(negativeOffsets).toEqual([...negativeOffsets].sort((a, b) => b - a));
@@ -66,26 +72,32 @@ describe('WorldClockTimeService', () => {
   it('should calculate valid UTC offsets for each timezone (T012)', async () => {
     const entries = await firstValueFrom(service.getCurrentTimes());
     const brazil = entries.find((e) => e.id === 'brazil');
-    const uk = entries.find((e) => e.id === 'uk');
+    const usa = entries.find((e) => e.id === 'usa');
     const china = entries.find((e) => e.id === 'china');
+    const japan = entries.find((e) => e.id === 'japan');
     const utc = entries.find((e) => e.id === 'utc');
 
     expect(brazil).toBeDefined();
-    expect(uk).toBeDefined();
+    expect(usa).toBeDefined();
     expect(china).toBeDefined();
+    expect(japan).toBeDefined();
     expect(utc).toBeDefined();
-
-    expect(utc!.utcOffset).toBe(0);
 
     // Brazil (America/Sao_Paulo): UTC-3 or UTC-2
     expect(brazil!.utcOffset).toBeGreaterThanOrEqual(-241);
     expect(brazil!.utcOffset).toBeLessThanOrEqual(-119);
 
-    // UK (Europe/London): UTC+0 or UTC+1
-    expect(uk!.utcOffset).toBeGreaterThanOrEqual(-1);
-    expect(uk!.utcOffset).toBeLessThanOrEqual(61);
+    // US East Coast (America/New_York): UTC-5 or UTC-4
+    expect(usa!.utcOffset).toBeGreaterThanOrEqual(-301);
+    expect(usa!.utcOffset).toBeLessThanOrEqual(-239);
 
     // China (Asia/Shanghai): UTC+8
     expect(china!.utcOffset).toBeCloseTo(480, 0);
+
+    // Japan (Asia/Tokyo): UTC+9
+    expect(japan!.utcOffset).toBeCloseTo(540, 0);
+
+    // UTC reference line
+    expect(utc!.utcOffset).toBe(0);
   });
 });

@@ -6,6 +6,7 @@
   gap: clamp(1rem, 2vw, 1.5rem);
   padding: clamp(1rem, 3vw, 2rem);
   background: var(--mat-sys-surface);
+  overflow-x: clip;
 }
 
 .world-header-card {
@@ -63,12 +64,14 @@
 
 .clocks-grid {
   display: grid;
-  grid-template-columns: repeat(var(--grid-columns, 3), 1fr);
+  grid-template-columns: repeat(var(--grid-columns, 3), minmax(0, 1fr));
   gap: clamp(1rem, 3%, 2rem);
   justify-items: stretch;
 
   app-world-clock-entry {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
 }
 

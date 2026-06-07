@@ -11,46 +11,44 @@ test.describe('World Clock Page - US1 (View Multiple Country Times)', () => {
     await page.goto('/world-clock', { waitUntil: 'networkidle' });
   });
 
-  test('T039: Navigate to /world-clock and verify ten clock cards visible with key country labels', async ({
+  test('T039: Navigate to /world-clock and verify nine clock cards visible with key country labels', async ({
     page,
   }) => {
     // Verify page loads without errors
     const heading = page.locator('h1');
     await expect(heading).toContainText('World Clock');
 
-    // Verify ten clock entries rendered
+    // Verify nine clock entries rendered
     const clockCards = page.locator('app-world-clock-entry');
-    await expect(clockCards).toHaveCount(10);
+    await expect(clockCards).toHaveCount(9);
 
     // Verify region labels present
     const regionNames = page.locator('.region-name');
-    await expect(regionNames).toHaveCount(10);
+    await expect(regionNames).toHaveCount(9);
 
     const regions = await regionNames.allTextContents();
     expect(regions).toContain('UTC-0');
     expect(regions).toContain('Brazil');
-    expect(regions).toContain('United Kingdom');
+    expect(regions).toContain('Germany');
     expect(regions).toContain('China');
     expect(regions).toContain('United States');
     expect(regions).toContain('India');
     expect(regions).toContain('Japan');
-    expect(regions).toContain('Germany');
-    expect(regions).toContain('Australia');
-    expect(regions).toContain('United Arab Emirates');
+    expect(regions).toContain('Canada');
+    expect(regions).toContain('Mexico');
 
     // Verify city names
     const cityNames = page.locator('.city-name');
     const cities = await cityNames.allTextContents();
     expect(cities).toContain('Prime Meridian');
     expect(cities).toContain('Brasília');
-    expect(cities).toContain('London');
+    expect(cities).toContain('Berlin');
     expect(cities).toContain('Shanghai');
     expect(cities).toContain('New York');
     expect(cities).toContain('New Delhi');
     expect(cities).toContain('Tokyo');
-    expect(cities).toContain('Berlin');
-    expect(cities).toContain('Sydney');
-    expect(cities).toContain('Dubai');
+    expect(cities).toContain('Toronto');
+    expect(cities).toContain('Mexico City');
   });
 
   test('T040: Page title and header text match specification', async ({ page }) => {
@@ -77,7 +75,7 @@ test.describe('World Clock Page - US1 (View Multiple Country Times)', () => {
     // Verify formatted time (HH:MM:SS) is displayed for each
     const digitalClocks = page.locator('.digital-clock');
     const times = await digitalClocks.allTextContents();
-    expect(times.length).toBe(10);
+    expect(times.length).toBe(9);
     
     // Each time should match HH:MM:SS format
     times.forEach((time) => {
@@ -90,15 +88,14 @@ test.describe('World Clock Page - US1 (View Multiple Country Times)', () => {
     
     const expectedLabels = [
       { region: 'UTC-0', city: 'Prime Meridian' },
-      { region: 'Germany', city: 'Berlin' },
-      { region: 'United Arab Emirates', city: 'Dubai' },
-      { region: 'India', city: 'New Delhi' },
-      { region: 'China', city: 'Shanghai' },
       { region: 'Japan', city: 'Tokyo' },
-      { region: 'Australia', city: 'Sydney' },
+      { region: 'China', city: 'Shanghai' },
+      { region: 'India', city: 'New Delhi' },
+      { region: 'Germany', city: 'Berlin' },
       { region: 'Brazil', city: 'Brasília' },
+      { region: 'Canada', city: 'Toronto' },
       { region: 'United States', city: 'New York' },
-      { region: 'United Kingdom', city: 'London' },
+      { region: 'Mexico', city: 'Mexico City' },
     ];
 
     for (let i = 0; i < expectedLabels.length; i++) {
@@ -116,7 +113,7 @@ test.describe('World Clock Page - US1 (View Multiple Country Times)', () => {
     await page.goto('/world-clock', { waitUntil: 'networkidle' });
 
     const clockCards = page.locator('app-world-clock-entry');
-    await expect(clockCards).toHaveCount(10);
+    await expect(clockCards).toHaveCount(9);
     await expect(clockCards.first().locator('.region-name')).toContainText('UTC-0');
 
     const hasHorizontalOverflow = await page.evaluate(() => {

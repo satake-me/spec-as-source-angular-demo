@@ -40,6 +40,38 @@ export class WorldClockEntryComponent {
     return `${this.entry.region}: ${this.entry.city} time ${this.formattedTime()}`;
   }
 
+  flagForEntry(): string {
+    switch (this.entry.id) {
+      case 'japan':
+        return 'jp';
+      case 'china':
+        return 'cn';
+      case 'india':
+        return 'in';
+      case 'germany':
+        return 'de';
+      case 'brazil':
+        return 'br';
+      case 'usa':
+        return 'us';
+      case 'canada':
+        return 'ca';
+      case 'mexico':
+        return 'mx';
+      default:
+        return '';
+    }
+  }
+
+  flagImageUrl(): string {
+    const code = this.flagForEntry();
+    return code ? `https://flagcdn.com/w40/${code}.png` : '';
+  }
+
+  hasCountryFlag(): boolean {
+    return this.flagForEntry().length > 0;
+  }
+
   /**
    * utcOffsetDisplay: Format UTC offset for display
    * Example: -180 minutes → "UTC-3"

@@ -3,10 +3,24 @@
 <mat-card 
   role="region" 
   [attr.aria-label]="ariaLabel()"
-  class="clock-card">
+  class="clock-card"
+  [class.clock-card--zero-meridian]="entry.id === 'utc'">
   
   <mat-card-header>
-    <mat-card-title class="region-name">{{ entry.region }}</mat-card-title>
+    <mat-card-title class="region-name">
+      @if (hasCountryFlag()) {
+        <img
+          class="country-flag"
+          [src]="flagImageUrl()"
+          [alt]="entry.region + ' flag'"
+          loading="lazy"
+          decoding="async"
+        />
+      } @else {
+        <span class="country-flag country-flag--fallback" [attr.aria-hidden]="true">🌐</span>
+      }
+      {{ entry.region }}
+    </mat-card-title>
     <mat-card-subtitle class="city-name">{{ entry.city }}</mat-card-subtitle>
   </mat-card-header>
 
