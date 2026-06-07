@@ -1,6 +1,4 @@
 {
-  "mf1": "https://mf1.dev.example.com/remoteEntry.json",
-  "mf2": "https://mf2.dev.example.com/remoteEntry.json",
   "ocpi-mfe": "http://localhost:4203/remoteEntry.json",
   "payments-mfe": "http://localhost:4204/remoteEntry.json"
 }

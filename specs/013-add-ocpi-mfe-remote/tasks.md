@@ -23,7 +23,7 @@
 - [x] T005 [P] Register `ocpi-mfe` in public/config/federation.manifest.development.json
 - [x] T006 [P] Register `ocpi-mfe` in public/config/federation.manifest.staging.json
 - [x] T007 [P] Register `ocpi-mfe` in public/config/federation.manifest.production.json
-- [x] T008 Add lazy-loaded `/ocpi` remote route using `loadRemoteComponent('ocpi-mfe', 'OcpiMfeComponent')` in src/app/app.routes.ts
+- [x] T008 Add lazy-loaded `/ocpi` remote route using `loadRemoteModule('ocpi-mfe', './Routes')` in src/app/app.routes.ts
 - [x] T009 Extend route-level remote contract tests for `ocpi-mfe` resolution and fallback behavior in src/app/app.routes.spec.ts
 
 **Checkpoint**: Federation manifest + base OCPI route are ready.
@@ -45,7 +45,7 @@
 
 - [x] T012 [US1] Add top-level OCPI menu entry pointing to `/ocpi` in public/config/sidebar-menu.json
 - [x] T013 [US1] Ensure route title/icon metadata for OCPI entry in src/app/app.routes.ts
-- [x] T014 [US1] Validate OCPI menu visibility/auth flags follow existing mf1/mf2 navigation pattern in public/config/sidebar-menu.json
+- [x] T014 [US1] Validate OCPI menu visibility/auth flags follow the existing authenticated remote navigation pattern in public/config/sidebar-menu.json
 
 **Checkpoint**: User Story 1 is independently functional.
 
@@ -80,7 +80,7 @@
 
 ### Tests for User Story 3
 
-- [x] T020 [P] [US3] Add contract-level test for `loadRemoteModule('ocpi-mfe', './Component')` and expected export mapping in src/app/app.routes.spec.ts
+- [x] T020 [P] [US3] Add contract-level test for `loadRemoteModule('ocpi-mfe', './Routes')` and remote route resolution in src/app/app.routes.spec.ts
 - [x] T021 [P] [US3] Add resilience test proving other remotes remain usable when OCPI is unavailable in e2e/independent-remotes.spec.ts
 
 ### Implementation for User Story 3

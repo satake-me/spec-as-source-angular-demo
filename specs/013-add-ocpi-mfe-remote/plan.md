@@ -5,7 +5,7 @@
 
 ## Summary
 
-Integrate the external `ocpi-mfe` microfrontend into the host using the same route-level native federation pattern already used for `mf1` and `mf2`, add a host menu entry for OCPI access, and register `http://localhost:4203/remoteEntry.json` as the development remote entry.
+Integrate the external `ocpi-mfe` microfrontend into the host using the route-level native federation pattern, add a host menu entry for OCPI access, and register `http://localhost:4203/remoteEntry.json` as the development remote entry.
 
 ## Technical Context
 
@@ -27,7 +27,7 @@ Integrate the external `ocpi-mfe` microfrontend into the host using the same rou
 - **Angular-Idiomatic by Default**: Implementation keeps Angular-native route lazy loading via `loadRemoteModule` and standalone route config.
 - **Strong Typing and Contracts**: Contracts include typed manifest shape, remote key, exposed module key `./Component`, and route-to-remote binding.
 - **Test at the Right Level**: Unit/component tests cover route and menu wiring; integration tests cover remote loader fallback; e2e covers click-to-render journey.
-- **Architectural Simplicity**: Reuses current mf1/mf2 federation pattern without adding new wrappers/services.
+- **Architectural Simplicity**: Reuses the host's current federation pattern without adding new wrappers/services.
 
 ## Project Structure
 
@@ -66,8 +66,8 @@ e2e/
 
 ## Phase 0: Research Findings
 
-- Remote registration follows the existing mf1/mf2 manifest contract to preserve operational consistency.
-- Route loading should use `loadRemoteComponent('ocpi-mfe', 'OcpiMfeComponent')` with the same fallback behavior used for other remotes.
+- Remote registration follows the host manifest contract to preserve operational consistency.
+- Route loading should use remote route lazy loading with the same fallback behavior used for other remotes.
 - Menu entry should be a direct host route link to OCPI, avoiding placeholder child routes that are not mapped to a remote.
 
 ## Post-Design Constitution Check

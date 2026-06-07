@@ -32,26 +32,6 @@
       "children": null
     },
     {
-      "id": "mf1",
-      "label": "Catalogo Federado",
-      "route": "/mf1",
-      "icon": "storefront",
-      "requiresAuth": false,
-      "visibleWhenAuthenticated": true,
-      "order": 13,
-      "children": null
-    },
-    {
-      "id": "mf2",
-      "label": "Dashboard Operacional",
-      "route": "/mf2",
-      "icon": "dashboard",
-      "requiresAuth": false,
-      "visibleWhenAuthenticated": true,
-      "order": 14,
-      "children": null
-    },
-    {
       "id": "ocpi_mfe",
       "label": "OCPI Modules",
       "route": "/ocpi",

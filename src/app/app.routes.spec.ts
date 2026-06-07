@@ -1,5 +1,4 @@
 import '@angular/compiler';
-import { Type } from '@angular/core';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('@angular-architects/native-federation', () => ({
@@ -65,26 +64,6 @@ describe('app routes', () => {
     expect(accountRoute?.canActivate?.length).toBe(1);
   });
 
-  it('lazily loads the mf1 remote from the shell route tree', () => {
-    const mf1Route = findShellRoute('mf1');
-
-    expect(mf1Route).toMatchObject({
-      path: 'mf1',
-      data: { title: 'Catalogo Federado', icon: 'storefront' },
-    });
-    expect(mf1Route?.loadComponent).toEqual(expect.any(Function));
-  });
-
-  it('lazily loads the mf2 remote from the shell route tree', () => {
-    const mf2Route = findShellRoute('mf2');
-
-    expect(mf2Route).toMatchObject({
-      path: 'mf2',
-      data: { title: 'Dashboard Operacional', icon: 'dashboard' },
-    });
-    expect(mf2Route?.loadComponent).toEqual(expect.any(Function));
-  });
-
   it('adds an OCPI placeholder route in the shell tree', () => {
     const ocpiRoute = findShellRoute('ocpi');
 
@@ -117,26 +96,6 @@ describe('app routes', () => {
 
     expect(paymentsRoute?.canActivate?.length).toBe(1);
     expect(paymentsRoute?.canActivate?.[0]).toBe(canActivateAuthenticatedRoute);
-  });
-
-  it('resolves mf1 using the manifest remote name and stable exposed module key', async () => {
-    class Mf1Component {}
-
-    loadRemoteModuleMock.mockResolvedValue({ Mf1Component });
-    const component = await findShellRoute('mf1')?.loadComponent?.();
-
-    expect(component).toBe(Mf1Component as unknown as Type<unknown>);
-    expect(loadRemoteModuleMock).toHaveBeenCalledWith('mf1', './Component');
-  });
-
-  it('resolves mf2 using the manifest remote name and stable exposed module key', async () => {
-    class Mf2Component {}
-
-    loadRemoteModuleMock.mockResolvedValue({ Mf2Component });
-    const component = await findShellRoute('mf2')?.loadComponent?.();
-
-    expect(component).toBe(Mf2Component as unknown as Type<unknown>);
-    expect(loadRemoteModuleMock).toHaveBeenCalledWith('mf2', './Component');
   });
 
   it('resolves ocpi-mfe using the stable exposed route contract', async () => {
@@ -179,8 +138,6 @@ describe('app routes', () => {
     const routeTree = JSON.stringify(routes);
 
     expect(routeTree).not.toContain('remoteEntry.json');
-    expect(routeTree).not.toContain('http://localhost:4201');
-    expect(routeTree).not.toContain('http://localhost:4202');
     expect(routeTree).not.toContain('http://localhost:4203');
     expect(routeTree).not.toContain('http://localhost:4204');
   });

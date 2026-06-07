@@ -12,16 +12,14 @@
 
    ```json
    {
-     "mf1": "http://localhost:4201/remoteEntry.json",
-     "mf2": "http://localhost:4202/remoteEntry.json",
-     "ocpi-mfe": "http://localhost:4203/remoteEntry.json"
+     "ocpi-mfe": "http://localhost:4203/remoteEntry.json",
+     "payments-mfe": "http://localhost:4204/remoteEntry.json"
    }
    ```
 
 2. Start remotes in separate terminals:
-   - `mf1` on `4201`
-   - `mf2` on `4202`
    - `ocpi-mfe` on `4203`
+   - `payments-mfe` on `4204`
 
 3. Start host app from `spec-as-source-angular-demo`.
 
@@ -29,11 +27,8 @@
 
 ## Expected Host Paths
 
-- Existing remotes:
-  - `/mf1`
-  - `/mf2`
-- New OCPI route:
-  - `/ocpi` (or configured OCPI path in route and menu contracts)
+- `/ocpi`
+- `/payments`
 
 ## Validation Flow
 
@@ -41,7 +36,7 @@
 2. Click OCPI menu entry and verify remote module renders inside host shell.
 3. Stop `ocpi-mfe` process and retry route:
    - Confirm recoverable unavailable UI is shown.
-   - Confirm host can still navigate to `/home`, `/mf1`, `/mf2`.
+   - Confirm host can still navigate to `/home` and `/payments`.
 4. Restart `ocpi-mfe` and re-open OCPI route without rebuilding host.
 
 ## Independent Delivery Check

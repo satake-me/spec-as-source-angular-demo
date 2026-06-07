@@ -2,15 +2,14 @@
 
 ## Purpose
 
-Define the runtime manifest contract to register the new `ocpi-mfe` remote alongside existing remotes.
+Define the runtime manifest contract to register the `ocpi-mfe` remote alongside the current host remotes.
 
 ## Format
 
 ```json
 {
-  "mf1": "http://localhost:4201/remoteEntry.json",
-  "mf2": "http://localhost:4202/remoteEntry.json",
-  "ocpi-mfe": "http://localhost:4203/remoteEntry.json"
+  "ocpi-mfe": "http://localhost:4203/remoteEntry.json",
+  "payments-mfe": "http://localhost:4204/remoteEntry.json"
 }
 ```
 

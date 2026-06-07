@@ -6,9 +6,8 @@
 
 - **Purpose**: Runtime map of remote names to remote entry URLs consumed by host.
 - **Fields**:
-  - `mf1`: existing remote entry URL.
-  - `mf2`: existing remote entry URL.
   - `ocpi-mfe`: new OCPI remote entry URL (`http://localhost:4203/remoteEntry.json` in development).
+  - `payments-mfe`: existing payments remote entry URL (`http://localhost:4204/remoteEntry.json` in development).
 - **Rules**:
   - Keys are stable remote identifiers used by route loader.
   - Values must be reachable remote entry endpoints for the active environment.
@@ -20,11 +19,9 @@
 - **Fields**:
   - `remoteName`: manifest key used by host loader (e.g., `ocpi-mfe`).
   - `remoteEntryUrl`: runtime URL resolved from manifest.
-  - `exposedModule`: module contract key (`./Component`).
-  - `exportName`: exported Angular component symbol consumed by route loader.
+  - `exposedModule`: module contract key (`./Routes`).
 - **Rules**:
   - `remoteName` and `exposedModule` form a contract boundary with remote repo.
-  - `exportName` must match the remote's exposed component export.
 
 ### OcpiRouteBinding
 
@@ -32,7 +29,6 @@
 - **Fields**:
   - `path`: host URL path for OCPI entry.
   - `remoteName`: `ocpi-mfe`.
-  - `exportName`: expected component export from remote module.
   - `requiresAuth`: whether OCPI route requires authenticated session.
   - `fallbackComponent`: component shown when remote load fails.
 - **Rules**:
@@ -72,6 +68,6 @@
 
 1. **Registered**: `ocpi-mfe` key present in manifest.
 2. **Resolvable**: Host can resolve `remoteEntry.json` endpoint.
-3. **Loadable**: Route can import `./Component` and access expected export.
+3. **Loadable**: Route can import `./Routes` and resolve the remote route tree.
 4. **Rendered**: OCPI remote component appears in host content outlet.
 5. **Unavailable**: Route falls back to unavailable page while preserving shell operation.
